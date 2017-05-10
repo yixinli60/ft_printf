@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void	ft_neg(long int *nbr, int *neg)
+static void	ft_neg(long long *nbr, long long *neg)
 {
 	if (*nbr < 0)
 	{
@@ -21,15 +21,15 @@ static void	ft_neg(long int *nbr, int *neg)
 	}
 }
 
-char		*ft_itoa(long int n)
+char		*ft_itoa(long long n)
 {
-	int		tmp;
-	int		len;
-	int		neg;
-	char	*str;
+	long long	tmp;
+	long long len;
+	long long	neg;
+	char			*str;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
+	//if (n == 9223372034)
+	//	return (ft_strdup("9223372034"));
 	tmp = n;
 	len = 1;
 	neg = 0;
@@ -37,7 +37,7 @@ char		*ft_itoa(long int n)
 	while (tmp /= 10)
 		len++;
 	len = len + neg;
-	if ((str = (char *)malloc(sizeof(char) * len)) == NULL)
+	if (!(str = (char *)malloc(sizeof(char) * len)))
 		return (NULL);
 	str[len] = '\0';
 	while (len--)

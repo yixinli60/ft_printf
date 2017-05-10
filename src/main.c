@@ -16,8 +16,7 @@
 int			main(void)
 {
 	//int zero = 0;
-	long long int nbr = 2147483647;
-
+	long long int nbr = -9223372036854775807;
 
 	char c = 'a';
 	//char *string = "Hello!";

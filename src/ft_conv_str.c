@@ -119,10 +119,10 @@ void		ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	char		*string;
 
 	i = va_arg(ap, intmax_t);
-	i = (intmax_t)(int)i;
-	nbr = ft_absval(i);
-	if (nbr < 0)
+	i = (intmax_t)(long long)i;
+	if (i < 0)
 		fmt_struc->neg_nbr = 1;
+	nbr = ft_absval(i);
 	str = ft_itoa(nbr);
 	string = ft_add_pad(str, fmt_struc, nbr);
 	write(1, string, ft_strlen(string));
