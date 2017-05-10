@@ -119,7 +119,20 @@ void		ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	char		*string;
 
 	i = va_arg(ap, intmax_t);
-	i = (intmax_t)(long long)i;
+	if (fmt_struc->length_mod == LENMOD_H)
+		i = (short)i;
+	else if (fmt_struc->length_mod == LENMOD_HH)
+		i = (char)i;
+	else if (fmt_struc->length_mod == LENMOD_L)
+		i = (long)i;
+	else if (fmt_struc->length_mod == LENMOD_LL)
+		i = (long long)i;
+	else if (fmt_struc->length_mod == LENMOD_J)
+		i = (intmax_t)i;
+	else if (fmt_struc->length_mod == LENMOD_Z)
+		i = (size_t)i;
+	else
+		i = (int)i;
 	if (i < 0)
 		fmt_struc->neg_nbr = 1;
 	nbr = ft_absval(i);
@@ -130,12 +143,22 @@ void		ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 
 void		ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 {
-	uintmax_t		i;
+	int		i;
 	char			str[2] = "\0";
 	char			*string;
 
-	i = va_arg(ap, uintmax_t);
+	i = va_arg(ap, int);
 	str[0] = i;
 	string = ft_add_pad(str, fmt_struc, 1);
 	write(1, string, ft_strlen(string));
+}
+
+void ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
+{
+	char *i;
+	char *string = NULL;
+	i = va_arg(ap, char *);
+	printf("string is %s\n", i);
+	string = ft_add_pad(i, fmt_struc, ft_strlen(string));
+	//write(1, string, ft_strlen(string));
 }

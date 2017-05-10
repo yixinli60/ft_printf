@@ -6,7 +6,7 @@
 /*   By: yli <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 11:17:28 by yli               #+#    #+#             */
-/*   Updated: 2016/12/05 11:18:07 by yli              ###   ########.fr       */
+/*   Updated: 2017/05/10 14:16:04 by yli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ static void	ft_neg(long long *nbr, long long *neg)
 char		*ft_itoa(long long n)
 {
 	long long	tmp;
-	long long len;
+	long long	len;
 	long long	neg;
-	char			*str;
+	char		*str;
 
-	//if (n == 9223372034)
-	//	return (ft_strdup("9223372034"));
 	tmp = n;
 	len = 1;
 	neg = 0;

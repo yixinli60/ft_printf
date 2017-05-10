@@ -57,5 +57,5 @@ char			*pre_str_zero(t_str_fmt *fmt_struc);
 char 			*ft_set_pad(t_str_fmt *fmt_struc, int len);
 char			*ft_wid_len_pre(t_str_fmt *fmt_struc, int len, char *str);
 void			ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc);
-
+void 			ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc);
 #endif

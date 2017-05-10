@@ -97,6 +97,6 @@ char				*ft_strtolower(char *str);
 char				*ft_strtoupper(char *str);
 
 size_t				ft_get_int_len(size_t l);
-intmax_t					ft_absval(intmax_t nbr);
+intmax_t			ft_absval(intmax_t nbr);
 
 #endif
