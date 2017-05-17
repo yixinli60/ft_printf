@@ -15,20 +15,19 @@
 
 int			main(void)
 {
-	int zero = 0;
-	int nbr = -922337;
+	//int zero = 0;
+	//long nbr = 9223372036854775807;
 
 	//char c = 'A';
 	char *string = "Hello!";
 
-
-	ft_printf("|%s|\n", string);
-	printf("|%s|\n\n", string);
+	ft_printf("|%-9s|\n", string);
+	printf("|%-9s|\n\n", string);
 
   printf("width, string, no precision, 0 flag:\n");
-  ft_printf("|%D|\n", nbr);
-	printf("|%D|\n\n", nbr);
-
+  ft_printf("|%p|\n", string);
+	printf("|%p|\n\n", string);
+/*
 	printf("precision, string, no width, 0 flag,:\n");
   ft_printf("|%0.15d|\n", nbr);
 	printf("|%0.15d|\n\n", nbr);
@@ -132,6 +131,6 @@ int			main(void)
 	printf("width, precision, string:\n");
 	ft_printf("|%+15.12d|\n", nbr);
 	printf("|%+15.12d|\n\n", nbr);
-
+*/
 	return (0);
 }

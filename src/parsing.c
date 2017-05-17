@@ -91,8 +91,6 @@ int		parse_lm(char **format, t_str_fmt *fmt_struc)
 
 void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 {
-	uintmax_t	u;
-
 	if (**fmt == 'd' || **fmt == 'i' || **fmt == 'D')
 	{
 		if (**fmt == 'D')
@@ -105,16 +103,21 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 			fmt_struc->length_mod = LENMOD_L;
 		ft_conv_cstr(ap, fmt_struc);
 	}
-
 	else if (**fmt == 'o' || **fmt == 'O' || **fmt == 'u'
 		|| **fmt == 'U' || **fmt == 'x' || **fmt == 'X')
-		u = va_arg(ap, uintmax_t);
+	{
+		if (**fmt == 'O' || **fmt == 'U' || **fmt == 'X')
+			fmt_struc->length_mod = LENMOD_L;
+		ft_conv_ouxstr(ap, fmt_struc);
+	}
 	else if (**fmt == 's' || **fmt == 'S')
 	{
 		if (**fmt == 'S')
 			fmt_struc->length_mod = LENMOD_L;
 		ft_conv_sstr(ap, fmt_struc);
 	}
+	else if (**fmt == 'p')
+		ft_conv_p(ap);
 	else
 		return ;
 	fmt_struc->conv = **fmt;

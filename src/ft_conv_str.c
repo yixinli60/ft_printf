@@ -68,6 +68,7 @@ char		*ft_wid_len_pre(t_str_fmt *fmt_struc, int int_len, char *str)
 	str_w_0pad = ft_add_signs(str, fmt_struc);
 	ft_memset(pad, ' ', (fmt_struc->wid - ft_strlen(str_w_0pad)));
 	pad[(fmt_struc->wid - int_len)] = '\0';
+	//printf("0pad is %s\n", str_w_0pad);
 	str_w_pad = ft_mflag(str_w_0pad, pad, fmt_struc);
 	free(pad);
 	return (str_w_pad);
@@ -156,9 +157,49 @@ void		ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 void ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	char *i;
-	char *string = NULL;
+	char *string;
+	char *final_str;
+
 	i = va_arg(ap, char *);
-	printf("string is %s\n", i);
-	string = ft_add_pad(i, fmt_struc, ft_strlen(string));
-	//write(1, string, ft_strlen(string));
+	if (!(string = malloc(sizeof(char) * (ft_strlen(i) + 1))))
+		return ;
+	string = i;
+	final_str = ft_add_pad(string, fmt_struc, ft_strlen(string));
+	write(1, final_str, ft_strlen(final_str));
+}
+
+void ft_conv_ouxstr(va_list ap, t_str_fmt *fmt_struc)
+{
+	uintmax_t	i;
+	char		*str;
+	char		*string;
+
+	i = va_arg(ap, uintmax_t);
+	if (fmt_struc->length_mod == LENMOD_H)
+		i = (unsigned short)i;
+	else if (fmt_struc->length_mod == LENMOD_HH)
+		i = (unsigned char)i;
+	else if (fmt_struc->length_mod == LENMOD_L)
+		i = (unsigned long)i;
+	else if (fmt_struc->length_mod == LENMOD_LL)
+		i = (unsigned long long)i;
+	else if (fmt_struc->length_mod == LENMOD_J)
+		i = (uintmax_t)i;
+	else if (fmt_struc->length_mod == LENMOD_Z)
+		i = (size_t)i;
+	else
+		i = (int)i;
+	str = ft_itoa(i);
+	string = ft_add_pad(str, fmt_struc, i);
+	write(1, string, ft_strlen(string));
+}
+
+void ft_conv_p(va_list ap)
+{
+	char	*i;
+	i = va_arg(ap, char *);
+	//if (!(string = malloc(sizeof(char) * 15)))
+	//	return ;
+	write(1, string, 15);
+	//free(string);
 }
