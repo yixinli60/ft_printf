@@ -97,18 +97,35 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 			fmt_struc->length_mod = LENMOD_L;
 		ft_conv_dstr(ap, fmt_struc);
 	}
+	else if (**fmt == 'u' || **fmt == 'U')
+	{
+		if (**fmt == 'U')
+			fmt_struc->length_mod = LENMOD_L;
+		ft_conv_ustr(ap, fmt_struc);
+	}
 	else if (**fmt == 'c' || **fmt == 'C')
 	{
 		if (**fmt == 'C')
 			fmt_struc->length_mod = LENMOD_L;
 		ft_conv_cstr(ap, fmt_struc);
 	}
-	else if (**fmt == 'o' || **fmt == 'O' || **fmt == 'u'
-		|| **fmt == 'U' || **fmt == 'x' || **fmt == 'X')
+	else if (**fmt == 'o' || **fmt == 'O')
 	{
-		if (**fmt == 'O' || **fmt == 'U' || **fmt == 'X')
+		if (**fmt == 'O')
+		{
 			fmt_struc->length_mod = LENMOD_L;
-		ft_conv_ouxstr(ap, fmt_struc);
+			fmt_struc->cap = 1;
+		}
+		ft_conv_ostr(ap, fmt_struc);
+	}
+	else if (**fmt == 'x' || **fmt == 'X')
+	{
+		if (**fmt == 'X')
+		{
+			fmt_struc->length_mod = LENMOD_L;
+			fmt_struc->cap = 1;
+		}
+		ft_conv_xstr(ap, fmt_struc);
 	}
 	else if (**fmt == 's' || **fmt == 'S')
 	{
@@ -117,7 +134,7 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 		ft_conv_sstr(ap, fmt_struc);
 	}
 	else if (**fmt == 'p')
-		ft_conv_p(ap);
+		ft_conv_p(ap, fmt_struc);
 	else
 		return ;
 	fmt_struc->conv = **fmt;

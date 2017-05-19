@@ -10,113 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** pre_str_zero
-** when both precision and string are "0"
-** malloc pad of size width, if plus flag is present
-** if plus flag is not, return empty string of width size
-*/
-
 #include "libft/libft.h"
 #include "../include/ft_printf.h"
 
-char		*pre_str_zero(t_str_fmt *fmt_struc)
-{
-	char	*pad;
-	char	*pad_w_spad;
-
-	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid) + 1)))
-		return (0);
-	if (fmt_struc->flag.plus)
-	{
-		ft_memset(pad, ' ', (fmt_struc->wid));
-		pad[(fmt_struc->wid)] = '\0';
-		pad_w_spad = ft_strcat(pad, "+");
-		free(pad);
-		return (pad_w_spad);
-	}
-	else
-	{
-		ft_memset(pad, ' ', (fmt_struc->wid));
-		pad[(fmt_struc->wid)] = '\0';
-		pad_w_spad = pad;
-		free(pad);
-		return (pad_w_spad);
-	}
-}
-
-char		*ft_wid_len_pre(t_str_fmt *fmt_struc, int int_len, char *str)
-{
-	char	*str_w_0pad;
-	char	*pad;
-	char	*str_w_pad;
-
-	if (fmt_struc->flag.plus || fmt_struc->flag.space ||
-		fmt_struc->neg_nbr)
-		int_len = int_len + 1;
-	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - int_len + 1))))
-		return (0);
-	if (fmt_struc->pre == -1 && fmt_struc->flag.zero
-			&& !fmt_struc->flag.minus)
-	{
-		ft_memset(pad, '0', (fmt_struc->wid - int_len));
-		pad[(fmt_struc->wid - int_len)] = '\0';
-		str_w_pad = ft_strcat(pad, str);
-		free(pad);
-		return (ft_add_signs(str_w_pad, fmt_struc));
-	}
-	str_w_0pad = ft_add_signs(str, fmt_struc);
-	ft_memset(pad, ' ', (fmt_struc->wid - ft_strlen(str_w_0pad)));
-	pad[(fmt_struc->wid - int_len)] = '\0';
-	//printf("0pad is %s\n", str_w_0pad);
-	str_w_pad = ft_mflag(str_w_0pad, pad, fmt_struc);
-	free(pad);
-	return (str_w_pad);
-}
-
-char		*ft_set_pad(t_str_fmt *fmt_struc, int len)
-{
-	char *pad;
-
-	pad = NULL;
-	if (!(pad = malloc(sizeof(char) * (fmt_struc->pre - len + 1))))
-		return (0);
-	ft_memset(pad, '0', (fmt_struc->pre - len));
-	pad[(fmt_struc->pre - len)] = '\0';
-	return (pad);
-}
-
-char		*ft_add_pad(char *str, t_str_fmt *fmt_struc, intmax_t nbr)
-{
-	char	*pad;
-	char	*str_w_0pad;
-	int		int_len;
-
-	int_len = ft_get_int_len(nbr);
-	if (fmt_struc->pre == 0 && *str == '0')
-		return (pre_str_zero(fmt_struc));
-	else if (fmt_struc->pre >= int_len && fmt_struc->pre >= fmt_struc->wid)
-	{
-		pad = ft_set_pad(fmt_struc, int_len);
-		str_w_0pad = ft_add_signs(ft_strcat(pad, str), fmt_struc);
-		return (str_w_0pad);
-	}
-	else if (fmt_struc->wid > int_len && int_len >= fmt_struc->pre)
-		return (ft_wid_len_pre(fmt_struc, int_len, str));
-	else if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= int_len)
-	{
-		pad = ft_set_pad(fmt_struc, int_len);
-		str_w_0pad = ft_add_signs(ft_strcat(pad, str), fmt_struc);
-		return (ft_add_space(str_w_0pad, fmt_struc));
-	}
-	return (ft_add_signs(str, fmt_struc));
-}
-
-void		ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
+void	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	intmax_t	i;
 	intmax_t	nbr;
-	char		*str;
 	char		*string;
 
 	i = va_arg(ap, intmax_t);
@@ -127,7 +27,7 @@ void		ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	else if (fmt_struc->length_mod == LENMOD_L)
 		i = (long)i;
 	else if (fmt_struc->length_mod == LENMOD_LL)
-		i = (long long)i;
+		i = (intmax_t)i;
 	else if (fmt_struc->length_mod == LENMOD_J)
 		i = (intmax_t)i;
 	else if (fmt_struc->length_mod == LENMOD_Z)
@@ -137,41 +37,13 @@ void		ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	if (i < 0)
 		fmt_struc->neg_nbr = 1;
 	nbr = ft_absval(i);
-	str = ft_itoa(nbr);
-	string = ft_add_pad(str, fmt_struc, nbr);
+	string = ft_add_pad(ft_itoa(nbr), fmt_struc);
 	write(1, string, ft_strlen(string));
 }
 
-void		ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
-{
-	int		i;
-	char			str[2] = "\0";
-	char			*string;
-
-	i = va_arg(ap, int);
-	str[0] = i;
-	string = ft_add_pad(str, fmt_struc, 1);
-	write(1, string, ft_strlen(string));
-}
-
-void ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
-{
-	char *i;
-	char *string;
-	char *final_str;
-
-	i = va_arg(ap, char *);
-	if (!(string = malloc(sizeof(char) * (ft_strlen(i) + 1))))
-		return ;
-	string = i;
-	final_str = ft_add_pad(string, fmt_struc, ft_strlen(string));
-	write(1, final_str, ft_strlen(final_str));
-}
-
-void ft_conv_ouxstr(va_list ap, t_str_fmt *fmt_struc)
+void	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
-	char		*str;
 	char		*string;
 
 	i = va_arg(ap, uintmax_t);
@@ -188,18 +60,151 @@ void ft_conv_ouxstr(va_list ap, t_str_fmt *fmt_struc)
 	else if (fmt_struc->length_mod == LENMOD_Z)
 		i = (size_t)i;
 	else
-		i = (int)i;
-	str = ft_itoa(i);
-	string = ft_add_pad(str, fmt_struc, i);
+		i = (unsigned int)i;
+	string = ft_add_pad(ft_itoa(i), fmt_struc);
+	write(1, string, ft_strlen(string));
+}
+void	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
+{
+	int		i;
+	char	str[2];
+	char	*string;
+
+	i = va_arg(ap, int);
+	if (fmt_struc->length_mod == LENMOD_L)
+		i = (long)i;
+	str[0] = i;
+	str[1] = '\0';
+	string = ft_add_pad(str, fmt_struc);
 	write(1, string, ft_strlen(string));
 }
 
-void ft_conv_p(va_list ap)
+void	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	char	*i;
+	char	*string;
+	char	*final_str;
+
 	i = va_arg(ap, char *);
-	//if (!(string = malloc(sizeof(char) * 15)))
-	//	return ;
-	write(1, string, 15);
-	//free(string);
+	if (i == NULL)
+	{
+		write(1, "(null)", 6);
+		return ;
+	}
+	//if ((int)ft_strlen(i) < fmt_struc->wid)
+	//{
+	if (!(string = malloc(sizeof(char) * (ft_strlen(i) + 1))))
+		return ;
+	string = i;
+	//}
+	//else
+	//{
+	//	if (!(string = malloc(sizeof(char) * (fmt_struc->wid))))
+	//		return ;
+	//	printf("string is |%s|\n,", string);
+	//}
+	final_str = ft_add_pad(string, fmt_struc);
+	write(1, final_str, ft_strlen(final_str));
+}
+	
+void	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
+{
+	uintmax_t	i;
+	char		*string_fin;
+	char		*str;
+	char		*string_0;
+
+	if (!(str = malloc(sizeof(char) * 20)))
+		return ;
+	i = va_arg(ap, uintmax_t);
+	if (fmt_struc->length_mod == LENMOD_H)
+		i = (unsigned short)i;
+	else if (fmt_struc->length_mod == LENMOD_HH)
+		i = (unsigned char)i;
+	else if (fmt_struc->length_mod == LENMOD_L)
+		i = (unsigned long)i;
+	else if (fmt_struc->length_mod == LENMOD_LL)
+		i = (unsigned long long)i;
+	else if (fmt_struc->length_mod == LENMOD_J)
+		i = (uintmax_t)i;
+	else if (fmt_struc->length_mod == LENMOD_Z)
+		i = (size_t)i;
+	else
+		i = (int)i;
+	ft_itoa_base(i, str, 8);
+	if (fmt_struc->flag.hash)
+		string_0 = ft_strjoin("0", str);
+	else
+		string_0 = str;
+	if (fmt_struc->cap == 1)
+		ft_to_upper(string_0);
+	string_fin = ft_add_pad(string_0, fmt_struc);
+	write(1, string_fin, ft_strlen(string_fin));
+}
+
+void	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
+{
+	uintmax_t	i;
+	char		*string_fin;
+	char		*str;
+	char		*string_0x;
+
+	if (!(str = malloc(sizeof(char) * 20)))
+		return ;
+	i = va_arg(ap, uintmax_t);
+	if (fmt_struc->length_mod == LENMOD_H)
+		i = (unsigned short)i;
+	else if (fmt_struc->length_mod == LENMOD_HH)
+		i = (unsigned char)i;
+	else if (fmt_struc->length_mod == LENMOD_L)
+		i = (unsigned long)i;
+	else if (fmt_struc->length_mod == LENMOD_LL)
+		i = (unsigned long long)i;
+	else if (fmt_struc->length_mod == LENMOD_J)
+		i = (uintmax_t)i;
+	else if (fmt_struc->length_mod == LENMOD_Z)
+		i = (size_t)i;
+	else
+		i = (int)i;
+	ft_itoa_base(i, str, 16);
+	if (fmt_struc->flag.hash)
+		string_0x = ft_strjoin("0x", str);
+	else
+		string_0x = str;
+	if (fmt_struc->cap == 1)
+		ft_to_upper(string_0x);
+	string_fin = ft_add_pad(string_0x, fmt_struc);
+	write(1, string_fin, ft_strlen(string_fin));
+}
+
+void	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
+{
+	uintmax_t	i;
+	char		*str;
+	char		*string = NULL;
+	char *string_fin;
+
+	if (!(str = malloc(sizeof(char) * 20)))
+		return ;
+	i = va_arg(ap, uintmax_t);
+	ft_itoa_base(i, str, 16);
+	string = ft_strjoin("0x", str);
+	free(str);
+	string_fin = ft_add_pad(string, fmt_struc);
+	write(1, string_fin, ft_strlen(string_fin));
+}
+
+void	ft_to_upper(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			str[i] -= 32;
+		else
+			i++;
+	}
+	i++;
 }

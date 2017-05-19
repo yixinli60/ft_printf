@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-void	ft_swap(int *a, int *b)
+void	ft_swap(uintmax_t *a, uintmax_t *b)
 {
-	int t;
+	uintmax_t t;
 
 	t = *a;
 	*a = *b;

@@ -13,18 +13,34 @@
 #include "libft/libft.h"
 #include "../include/ft_printf.h"
 
-char		*ft_add_signs(char *str, t_str_fmt *fmt_struc)
+char	*ft_add_signs(char *str, t_str_fmt *fmt_struc)
 {
+	char *string;
+//printf("str is %s\n", str);
+	if (!(string = malloc(sizeof(char) * (ft_strlen(str) + 2))))
+		return (0);
 	if (fmt_struc->neg_nbr)
-		return (ft_strjoin("-", str));
+	{
+		string = ft_strjoin("-", str);
+		return (string);
+	}
 	else if (fmt_struc->flag.plus)
-		return (ft_strjoin("+", str));
+	{
+		string = ft_strjoin("+", str);
+		return (string);
+	}
 	else if (fmt_struc->flag.space)
-		return (ft_strjoin(" ", str));
+		return (string = ft_strjoin(" ", str));
+	else if (fmt_struc->flag.zero && fmt_struc->wid > (int)ft_strlen(str) &&
+	fmt_struc->pre > fmt_struc->wid)
+	{
+		string = ft_strjoin("0", str);
+		return (string);
+	}
 	return (str);
 }
 
-char		*ft_add_space(char *str_w_0pad, t_str_fmt *fmt_struc)
+char	*ft_add_space(char *str_w_0pad, t_str_fmt *fmt_struc)
 {
 	char	*pad;
 	char	*str_w_spad;
@@ -44,7 +60,7 @@ char		*ft_add_space(char *str_w_0pad, t_str_fmt *fmt_struc)
 	return (str_w_spad);
 }
 
-char		*ft_mflag(char *str, char *pad, t_str_fmt *fmt_struc)
+char	*ft_mflag(char *str, char *pad, t_str_fmt *fmt_struc)
 {
 	if (fmt_struc->flag.minus)
 		return (ft_strjoin(str, pad));

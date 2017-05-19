@@ -70,7 +70,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-char				*ft_itoa(long long n);
+char				*ft_itoa(intmax_t n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
@@ -89,7 +89,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 int					ft_isspace(char c);
 int					ft_max(int x, int y);
-void				ft_swap(int *a, int *b);
+void				ft_swap(uintmax_t *a, uintmax_t *b);
 char				*ft_strtolower(char *str);
 char				*ft_strtolower(char *str);
 long long int		ft_pwr(int x, int y);

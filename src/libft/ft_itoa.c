@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void	ft_neg(long long *nbr, long long *neg)
+static void	ft_neg(intmax_t *nbr, intmax_t *neg)
 {
 	if (*nbr < 0)
 	{
@@ -21,11 +21,11 @@ static void	ft_neg(long long *nbr, long long *neg)
 	}
 }
 
-char		*ft_itoa(long long n)
+char		*ft_itoa(intmax_t n)
 {
-	long long	tmp;
-	long long	len;
-	long long	neg;
+	intmax_t	tmp;
+	intmax_t	len;
+	intmax_t	neg;
 	char		*str;
 
 	tmp = n;

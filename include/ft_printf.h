@@ -39,25 +39,39 @@ typedef struct	s_str_fmt
 	int			length_mod;
 	char		conv;
 	int			neg_nbr;
+	int			cap;
 }				t_str_fmt;
+
+void 			ft_parse_fmt(va_list ap, char **format);
+int				ft_printf(char *format, ...);
 
 int				parse_format(char *format, t_str_fmt *fmt_struc);
 int				parse_width(char **format, t_str_fmt *fmt_struc);
 int				parse_precision(char **format, t_str_fmt *fmt_struc);
 int				parse_lm(char **format, t_str_fmt *fmt_struc);
 void			parse_conv(va_list ap, char **format, t_str_fmt *fmt_struc);
-void			ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc);
-char 			*ft_add_pad(char *string, t_str_fmt *fmt_struc, intmax_t nbr);
+
+char			*ft_add_signs(char *str_w_0pad, t_str_fmt *fmt_struc);
 char			*ft_add_space(char *str, t_str_fmt *fmt_struc);
 char 			*ft_mflag(char *str, char *pad, t_str_fmt *fmt_struc);
-char			*ft_add_signs(char *str_w_0pad, t_str_fmt *fmt_struc);
-int				ft_printf(char *format, ...);
-void 			ft_parse_fmt(va_list ap, char **format);
+
 char			*pre_str_zero(t_str_fmt *fmt_struc);
-char 			*ft_set_pad(t_str_fmt *fmt_struc, int len);
 char			*ft_wid_len_pre(t_str_fmt *fmt_struc, int len, char *str);
+char 			*ft_set_pad(t_str_fmt *fmt_struc, int len);
+char 			*ft_add_pad(char *string, t_str_fmt *fmt_struc);
+
+void			ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc);
+void			ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc);
 void			ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc);
 void 			ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc);
-void 			ft_conv_ouxstr(va_list ap, t_str_fmt *fmt_struc);
-void 			ft_conv_p(va_list ap);
+void 			ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc);
+void 			ft_conv_p(va_list ap, t_str_fmt *fmt_struc);
+void			ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc);
+
+void			ft_swa(char *a, char *b);
+void			rev_str(char *str, int length);
+char			*ft_itoa_base(uintmax_t nbr, char *str, uintmax_t base);
+
+void	ft_to_upper(char *c);
+
 #endif

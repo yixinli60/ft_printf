@@ -15,19 +15,27 @@
 
 int			main(void)
 {
-	//int zero = 0;
-	//long nbr = 9223372036854775807;
+	int zero = 0;
+	int nbr = 12345678;
 
 	//char c = 'A';
-	char *string = "Hello!";
+	char *string = "0fjeowuf4983uru430ru349-tu4-394u3-93";
 
-	ft_printf("|%-9s|\n", string);
-	printf("|%-9s|\n\n", string);
+	ft_printf("|%014.15d|\n", nbr);
+	printf("|%014.15d|\n\n", nbr);
 
-  printf("width, string, no precision, 0 flag:\n");
-  ft_printf("|%p|\n", string);
-	printf("|%p|\n\n", string);
-/*
+	printf("pointer:\n");
+	ft_printf("|%9p|\n", string);
+	printf("|%9p|\n\n", string);
+
+	printf("hex:\n");
+	ft_printf("|%-#10x|\n", 123456789);
+	printf("|%-#10x|\n\n", 123456789);
+
+	printf("octal:\n");
+	ft_printf("|%#15o|\n", 123456789);
+	printf("|%#15o|\n\n", 123456789);
+
 	printf("precision, string, no width, 0 flag,:\n");
   ft_printf("|%0.15d|\n", nbr);
 	printf("|%0.15d|\n\n", nbr);
@@ -131,6 +139,6 @@ int			main(void)
 	printf("width, precision, string:\n");
 	ft_printf("|%+15.12d|\n", nbr);
 	printf("|%+15.12d|\n\n", nbr);
-*/
+
 	return (0);
 }
