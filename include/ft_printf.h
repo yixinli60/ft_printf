@@ -40,6 +40,7 @@ typedef struct	s_str_fmt
 	char		conv;
 	int			neg_nbr;
 	int			cap;
+	int 		hex;
 }				t_str_fmt;
 
 void 			ft_parse_fmt(va_list ap, char **format);
@@ -69,9 +70,8 @@ void 			ft_conv_p(va_list ap, t_str_fmt *fmt_struc);
 void			ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc);
 
 void			ft_swa(char *a, char *b);
-void			rev_str(char *str, int length);
-char			*ft_itoa_base(uintmax_t nbr, char *str, uintmax_t base);
+void			rev_str(char *str, int len);
+char			*ft_handle_str(char *str, t_str_fmt *fmt_struc);
 
-void	ft_to_upper(char *c);
-
+char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
 #endif

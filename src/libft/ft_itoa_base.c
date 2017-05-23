@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "../include/ft_printf.h"
+#include "libft.h"
 
 void	ft_swa(char *a, char *b)
 {
@@ -41,6 +40,7 @@ char	*ft_itoa_base(uintmax_t nbr, char *str, uintmax_t base)
 {
 	int	i;
 	int	rem;
+
 	i = 0;
 	rem = 0;
 	while (nbr != 0)

@@ -73,6 +73,11 @@ void	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 	i = va_arg(ap, int);
 	if (fmt_struc->length_mod == LENMOD_L)
 		i = (long)i;
+	if (i == 0)
+	{
+		write(1, " ", 1);
+		return ;
+	}
 	str[0] = i;
 	str[1] = '\0';
 	string = ft_add_pad(str, fmt_struc);
@@ -91,22 +96,22 @@ void	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 		write(1, "(null)", 6);
 		return ;
 	}
-	//if ((int)ft_strlen(i) < fmt_struc->wid)
-	//{
-	if (!(string = malloc(sizeof(char) * (ft_strlen(i) + 1))))
-		return ;
-	string = i;
-	//}
-	//else
-	//{
-	//	if (!(string = malloc(sizeof(char) * (fmt_struc->wid))))
-	//		return ;
-	//	printf("string is |%s|\n,", string);
-	//}
-	final_str = ft_add_pad(string, fmt_struc);
+	if ((int)ft_strlen(i) > fmt_struc->pre && fmt_struc->pre > 0)
+	{
+		if (!(string = malloc(sizeof(char) * (fmt_struc->pre))))
+			return ;
+		ft_strncpy(string, i, fmt_struc->pre);
+	}
+	else
+	{
+		if (!(string = malloc(sizeof(char) * (ft_strlen(i) + 1))))
+			return ;
+		string = i;
+	}
+	final_str = ft_handle_str(string, fmt_struc);
 	write(1, final_str, ft_strlen(final_str));
 }
-	
+
 void	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
@@ -130,14 +135,14 @@ void	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 	else if (fmt_struc->length_mod == LENMOD_Z)
 		i = (size_t)i;
 	else
-		i = (int)i;
+		i = (unsigned int)i;
 	ft_itoa_base(i, str, 8);
 	if (fmt_struc->flag.hash)
 		string_0 = ft_strjoin("0", str);
 	else
 		string_0 = str;
 	if (fmt_struc->cap == 1)
-		ft_to_upper(string_0);
+		ft_strtoupper(string_0);
 	string_fin = ft_add_pad(string_0, fmt_struc);
 	write(1, string_fin, ft_strlen(string_fin));
 }
@@ -147,7 +152,6 @@ void	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 	uintmax_t	i;
 	char		*string_fin;
 	char		*str;
-	char		*string_0x;
 
 	if (!(str = malloc(sizeof(char) * 20)))
 		return ;
@@ -165,16 +169,13 @@ void	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 	else if (fmt_struc->length_mod == LENMOD_Z)
 		i = (size_t)i;
 	else
-		i = (int)i;
+		i = (unsigned int)i;
 	ft_itoa_base(i, str, 16);
-	if (fmt_struc->flag.hash)
-		string_0x = ft_strjoin("0x", str);
-	else
-		string_0x = str;
+	string_fin = ft_handle_hex(str, fmt_struc);
 	if (fmt_struc->cap == 1)
-		ft_to_upper(string_0x);
-	string_fin = ft_add_pad(string_0x, fmt_struc);
+		ft_strtoupper(string_fin);
 	write(1, string_fin, ft_strlen(string_fin));
+	free(str);
 }
 
 void	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
@@ -187,24 +188,14 @@ void	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 	if (!(str = malloc(sizeof(char) * 20)))
 		return ;
 	i = va_arg(ap, uintmax_t);
-	ft_itoa_base(i, str, 16);
+	if (i == 0)
+		str = "0";
+	else
+	{
+		ft_itoa_base(i, str, 16);
+		free(str);
+	}
 	string = ft_strjoin("0x", str);
-	free(str);
 	string_fin = ft_add_pad(string, fmt_struc);
 	write(1, string_fin, ft_strlen(string_fin));
-}
-
-void	ft_to_upper(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] >= 'a' && str[i] <= 'z')
-			str[i] -= 32;
-		else
-			i++;
-	}
-	i++;
 }

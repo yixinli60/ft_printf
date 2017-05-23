@@ -6,7 +6,7 @@
 /*   By: yli <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:38:18 by yli               #+#    #+#             */
-/*   Updated: 2017/05/03 13:51:42 by yli              ###   ########.fr       */
+/*   Updated: 2017/05/22 11:37:55 by yli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ char				*ft_strtoupper(char *str);
 
 size_t				ft_get_int_len(size_t l);
 intmax_t			ft_absval(intmax_t nbr);
+char				*ft_itoa_base(uintmax_t nbr, char *str, uintmax_t base);
+void				ft_to_upper(char *str);
 
 #endif

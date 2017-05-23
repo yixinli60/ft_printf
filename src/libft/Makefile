@@ -6,12 +6,12 @@
 #    By: yli <marvin@42.fr>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 09:07:35 by yli               #+#    #+#              #
-#    Updated: 2017/05/03 12:04:32 by yli              ###   ########.fr        #
+#    Updated: 2017/05/22 11:38:26 by yli              ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libft.a
-CC = gcc 
+CC = gcc
 CFLAGS =  -Wall -Wextra -Werror -c -I
 
 OBJECTS = ft_memset.o \
@@ -82,8 +82,10 @@ OBJECTS = ft_memset.o \
 	ft_strtolower.o \
 	ft_strtoupper.o \
 	ft_get_int_len.o \
-	ft_absval.o
-
+	ft_absval.o \
+	ft_itoa_base.o \
+	ft_str_toupper.o
+ 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)

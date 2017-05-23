@@ -50,34 +50,40 @@ char		*ft_wid_len_pre(t_str_fmt *fmt_struc, int int_len, char *str)
 	char	*str_w_0pad;
 	char	*pad;
 	char	*str_w_pad;
+	char	*string_0x;
 
-	if (fmt_struc->flag.plus || fmt_struc->flag.space ||
-		fmt_struc->neg_nbr)
+	if (fmt_struc->flag.plus || fmt_struc->flag.space || fmt_struc->neg_nbr)
 		int_len = int_len + 1;
 	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - int_len + 1))))
 		return (0);
-	if (fmt_struc->pre == -1 && fmt_struc->flag.zero
-			&& !fmt_struc->flag.minus)
+	if (fmt_struc->pre == -1 && fmt_struc->flag.zero && !fmt_struc->flag.minus)
 	{
 		ft_memset(pad, '0', (fmt_struc->wid - int_len));
 		pad[(fmt_struc->wid - int_len)] = '\0';
 		str_w_pad = ft_strcat(pad, str);
-		free(pad);
 		return (ft_add_signs(str_w_pad, fmt_struc));
 	}
-	str_w_0pad = ft_add_signs(str, fmt_struc);
-	ft_memset(pad, ' ', (fmt_struc->wid - ft_strlen(str_w_0pad)));
-	pad[(fmt_struc->wid - int_len)] = '\0';
-	str_w_pad = ft_mflag(str_w_0pad, pad, fmt_struc);
-	free(pad);
-	return (str_w_pad);
+	if (fmt_struc->flag.hash && fmt_struc->hex)
+		string_0x = ft_strjoin("0x", str);
+	else
+		string_0x = str;
+	str_w_0pad = ft_add_signs(string_0x, fmt_struc);
+	if (fmt_struc->wid >= (int)ft_strlen(str_w_0pad))
+	{
+		ft_memset(pad, ' ', (fmt_struc->wid - ft_strlen(str_w_0pad)));
+		pad[(fmt_struc->wid - int_len)] = '\0';
+		str_w_pad = ft_mflag(str_w_0pad, pad, fmt_struc);
+		free(pad);
+		return (str_w_pad);
+	}
+	else
+		return (str_w_0pad);
 }
 
 char		*ft_set_pad(t_str_fmt *fmt_struc, int len)
 {
-	char *pad;
+	char	*pad;
 
-	pad = NULL;
 	if (!(pad = malloc(sizeof(char) * (fmt_struc->pre - len + 1))))
 		return (0);
 	ft_memset(pad, '0', (fmt_struc->pre - len));
@@ -100,7 +106,7 @@ char		*ft_add_pad(char *str, t_str_fmt *fmt_struc)
 		str_w_0pad = ft_add_signs(ft_strcat(pad, str), fmt_struc);
 		return (str_w_0pad);
 	}
-	else if (fmt_struc->wid > str_len && str_len >= fmt_struc->pre)
+	else if (fmt_struc->wid >= str_len && str_len >= fmt_struc->pre)
 		return (ft_wid_len_pre(fmt_struc, str_len, str));
 	else if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= str_len)
 	{
