@@ -6,7 +6,7 @@
 #    By: yli <yli@student.42.us.org>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/06 15:52:41 by yli               #+#    #+#              #
-#    Updated: 2017/04/06 16:00:42 by yli              ###   ########.fr        #
+#    Updated: 2017/05/23 16:42:27 by yli              ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJECTS) $(SRC)/libft/libft.a
 	$(CC) -c -o $(NAME) $(OBJECTS) ./src/libft/libft.a
 
 %.o: %.c
-		$(CC) $(CFLAGS) -I . -I ./libft -o $@ $<
+		$(CC) $(CFLAGS) -c -I . -I ./libft -o $@ $<
 
 clean:
 		/bin/rm -f $(OBEJCTS)
