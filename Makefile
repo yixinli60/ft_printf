@@ -14,21 +14,32 @@ NAME = libftprintf.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-OBJECTS = ft_printf.o \
-	ft_con_str.o \
-	parsing.o \
-	printing.o 
+SRC = src
+FILENAMES = $(SRC)/ft_printf.c \
+	$(SRC)/ft_conv_str.c \
+	$(SRC)/ft_handle_str.c \
+	$(SRC)/ft_pad_str.c \
+	$(SRC)/parsing.c \
+	$(SRC)/printing.c \
+
+OBJECTS	= $(FILENAMES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-ar rc $(NAME) $(OBEJCTS)
+$(NAME): $(OBJECTS) $(SRC)/libft/libft.a
+	cd $(SRC)/libft && make && make clean
+	$(CC) -c -o $(NAME) $(OBJECTS) ./src/libft/libft.a
+
+%.o: %.c
+		$(CC) $(CFLAGS) -I . -I ./libft -o $@ $<
 
 clean:
-	/bin/rm -f $(OBEJCTS)
+		/bin/rm -f $(OBEJCTS)
 
 fclean: clean
-	/bing/rm -f $(NAME)
+		cd libft && make fclean
+		cd ../
+		/bin/rm -f $(NAME)
 
 re: fclean all
 
