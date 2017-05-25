@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static void	ft_neg(intmax_t *nbr, intmax_t *neg)
+/*
+static void	ft_neg(uintmax_t *nbr, uintmax_t *neg)
 {
 	if (*nbr < 0)
 	{
@@ -20,21 +20,21 @@ static void	ft_neg(intmax_t *nbr, intmax_t *neg)
 		*neg = 1;
 	}
 }
-
-char		*ft_itoa(intmax_t n)
+*/
+char		*ft_itoa(uintmax_t n)
 {
-	intmax_t	tmp;
-	intmax_t	len;
-	intmax_t	neg;
+	uintmax_t	tmp;
+	uintmax_t	len;
+	//uintmax_t	neg;
 	char		*str;
 
 	tmp = n;
 	len = 1;
-	neg = 0;
-	ft_neg(&n, &neg);
+	//neg = 0;
+	//ft_neg(&n, &neg);
 	while (tmp /= 10)
 		len++;
-	len = len + neg;
+	//len = len + neg;
 	if (!(str = (char *)malloc(sizeof(char) * len)))
 		return (NULL);
 	str[len] = '\0';
@@ -43,7 +43,7 @@ char		*ft_itoa(intmax_t n)
 		str[len] = n % 10 + '0';
 		n = n / 10;
 	}
-	if (neg)
-		str[0] = '-';
+	//if (neg)
+	//	str[0] = '-';
 	return (str);
 }

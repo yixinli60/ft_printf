@@ -60,7 +60,7 @@ void	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
 	else if (fmt_struc->length_mod == LENMOD_Z)
 		i = (size_t)i;
 	else
-		i = (unsigned int)i;
+		i = (uintmax_t)i;
 	string = ft_add_pad(ft_itoa(i), fmt_struc);
 	write(1, string, ft_strlen(string));
 }
