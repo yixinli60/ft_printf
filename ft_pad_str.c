@@ -17,8 +17,8 @@
 ** if plus flag is not, return empty string of width size
 */
 
-#include "libft/libft.h"
-#include "../include/ft_printf.h"
+#include "src/libft/libft.h"
+#include "include/ft_printf.h"
 
 char		*pre_str_zero(t_str_fmt *fmt_struc)
 {
@@ -61,6 +61,7 @@ char		*ft_wid_len_pre(t_str_fmt *fmt_struc, int int_len, char *str)
 		ft_memset(pad, '0', (fmt_struc->wid - int_len));
 		pad[(fmt_struc->wid - int_len)] = '\0';
 		str_w_pad = ft_strcat(pad, str);
+		//free(pad);
 		return (ft_add_signs(str_w_pad, fmt_struc));
 	}
 	if (fmt_struc->flag.hash && fmt_struc->hex)
@@ -104,6 +105,7 @@ char		*ft_add_pad(char *str, t_str_fmt *fmt_struc)
 	{
 		pad = ft_set_pad(fmt_struc, str_len);
 		str_w_0pad = ft_add_signs(ft_strcat(pad, str), fmt_struc);
+		//free(pad);
 		return (str_w_0pad);
 	}
 	else if (fmt_struc->wid >= str_len && str_len >= fmt_struc->pre)

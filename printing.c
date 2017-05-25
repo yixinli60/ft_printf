@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "../include/ft_printf.h"
+#include "src/libft/libft.h"
+#include "include/ft_printf.h"
 
 char	*ft_add_signs(char *str, t_str_fmt *fmt_struc)
 {
@@ -22,6 +22,7 @@ char	*ft_add_signs(char *str, t_str_fmt *fmt_struc)
 	if (fmt_struc->neg_nbr)
 	{
 		string = ft_strjoin("-", str);
+		//free(str);
 		return (string);
 	}
 	else if (fmt_struc->flag.plus)

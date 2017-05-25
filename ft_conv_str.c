@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "../include/ft_printf.h"
+#include "src/libft/libft.h"
+#include "include/ft_printf.h"
 
 void	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 {

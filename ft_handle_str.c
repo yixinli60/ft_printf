@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "../include/ft_printf.h"
+#include "src/libft/libft.h"
+#include "include/ft_printf.h"
 
 char	*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
 {

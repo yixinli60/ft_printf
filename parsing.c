@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "../include/ft_printf.h"
+#include "src/libft/libft.h"
+#include "include/ft_printf.h"
 
 int		parse_format(char *format, t_str_fmt *fmt_struc)
 {
