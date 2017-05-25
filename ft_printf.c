@@ -24,6 +24,7 @@ void	ft_parse_fmt(va_list ap, char **format)
 		{
 			write(1, "%", 1);
 			(*format)++;
+			return ;
 		}
 		ft_memset(&fmt_struc, 0, sizeof(fmt_struc));
 		while (parse_format(*format, &fmt_struc))
