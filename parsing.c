@@ -136,8 +136,8 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	}
 	else if (**fmt == 'p')
 		ft_conv_p(ap, fmt_struc);
-	else
-		return ;
+	else if (**fmt == '%')
+		ft_conv_pct(ap, fmt_struc);
 	fmt_struc->conv = **fmt;
 	(*fmt)++;
 }

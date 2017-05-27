@@ -199,3 +199,19 @@ void	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 	string_fin = ft_add_pad(string, fmt_struc);
 	write(1, string_fin, ft_strlen(string_fin));
 }
+
+void	ft_conv_pct(va_list ap, t_str_fmt *fmt_struc)
+{
+	int		i;
+	char	str[2];
+	char	*string;
+
+	i = va_arg(ap, int);
+	str[0] = i;
+	str[1] = '\0';
+	string = ft_add_pad(str, fmt_struc);
+	printf("str is |%s|\n", string);
+
+	write(1, string, ft_strlen(string));
+
+}

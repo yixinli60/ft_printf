@@ -37,7 +37,7 @@ clean:
 	/bin/rm -f $(OBJECTS)
 
 fclean: clean
-		cd libft && make fclean
+		cd ./src/libft && make fclean
 		cd ../
 		/bin/rm -f $(NAME)
 

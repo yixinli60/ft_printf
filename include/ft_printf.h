@@ -68,6 +68,7 @@ void 			ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc);
 void 			ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc);
 void 			ft_conv_p(va_list ap, t_str_fmt *fmt_struc);
 void			ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc);
+void			ft_conv_pct(va_list ap, t_str_fmt *fmt_struc);
 
 void			ft_swa(char *a, char *b);
 void			rev_str(char *str, int len);
