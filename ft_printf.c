@@ -13,41 +13,51 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-void	ft_parse_fmt(va_list ap, char **format)
+int	ft_parse_fmt(va_list ap, char **format)
 {
 	t_str_fmt	fmt_struc;
+	static int	len;
 
+	len = 0;
 	if (**format == '%')
 	{
+		write(1, "%", 1);
 		(*format)++;
-		if (**format == '%')
-		{
-			write(1, "%", 1);
-			(*format)++;
-			return ;
-		}
-		ft_memset(&fmt_struc, 0, sizeof(fmt_struc));
-		while (parse_format(*format, &fmt_struc))
-			(*format)++;
-		parse_width(format, &fmt_struc);
-		parse_precision(format, &fmt_struc);
-		parse_lm(format, &fmt_struc);
-		parse_conv(ap, format, &fmt_struc);
+		len++;
+		return (len);
 	}
-	else
-	{
-		ft_putchar(**format);
-		(*format)++;
-	}
+	ft_memset(&fmt_struc, 0, sizeof(fmt_struc));
+	parse_format(*format, &fmt_struc);
+		//(*format)++;
+	parse_width(format, &fmt_struc);
+	parse_precision(format, &fmt_struc);
+	parse_lm(format, &fmt_struc);
+	parse_conv(ap, format, &fmt_struc);
+	return (len);
 }
 
 int		ft_printf(char *format, ...)
 {
 	va_list		ap;
+	int		len;
 
+	len = 0;
 	va_start(ap, format);
-	while (*format != '\0')
-		ft_parse_fmt(ap, &format);
+	while(*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			len = ft_parse_fmt(ap, &format);
+		}
+		else
+		{
+			write(1, format, 1);
+			(format)++;
+			len++;
+		}
+	}
 	va_end(ap);
-	return (0);
+	return (len);
+
 }

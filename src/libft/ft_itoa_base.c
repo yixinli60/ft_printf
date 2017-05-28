@@ -43,6 +43,12 @@ char	*ft_itoa_base(uintmax_t nbr, char *str, uintmax_t base)
 
 	i = 0;
 	rem = 0;
+	if (nbr == 0)
+	{
+		str[0] = '0';
+		str[1] = '\0';
+		return (str);
+	}
 	while (nbr != 0)
 	{
 		rem = nbr % base;

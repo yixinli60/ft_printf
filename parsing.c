@@ -121,11 +121,11 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	else if (**fmt == 'x' || **fmt == 'X')
 	{
 		fmt_struc->hex = 1;
-		if (**fmt == 'X')
-		{
-			fmt_struc->length_mod = LENMOD_L;
+		//if (**fmt == 'X')
+		//{
+		//	fmt_struc->length_mod = LENMOD_L;
 			fmt_struc->cap = 1;
-		}
+	//	}
 		ft_conv_xstr(ap, fmt_struc);
 	}
 	else if (**fmt == 's' || **fmt == 'S')

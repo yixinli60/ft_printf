@@ -75,7 +75,7 @@ void	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 		i = (long)i;
 	if (i == 0)
 	{
-		write(1, " ", 1);
+		write(1, "", 1);
 		return ;
 	}
 	str[0] = i;

@@ -43,7 +43,7 @@ typedef struct	s_str_fmt
 	int 		hex;
 }				t_str_fmt;
 
-void 			ft_parse_fmt(va_list ap, char **format);
+int 			ft_parse_fmt(va_list ap, char **format);
 int				ft_printf(char *format, ...);
 
 int				parse_format(char *format, t_str_fmt *fmt_struc);
