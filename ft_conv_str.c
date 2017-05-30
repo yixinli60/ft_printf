@@ -107,7 +107,7 @@ void	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 		return ;
 	}
 	if (fmt_struc->length_mod == LENMOD_L)
-		i = (wchat_t)i;
+		i = (wchar_t)i;
 	if ((int)ft_strlen(i) > fmt_struc->pre && fmt_struc->pre > 0)
 	{
 		if (!(string = malloc(sizeof(char) * (fmt_struc->pre))))
