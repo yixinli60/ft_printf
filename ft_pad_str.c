@@ -97,6 +97,7 @@ char		*ft_add_pad(char *str, t_str_fmt *fmt_struc)
 	char	*pad;
 	char	*str_w_0pad;
 	int		str_len;
+	//printf("str is |%s|\n", str);
 
 	str_len = ft_strlen(str);
 	if (fmt_struc->pre == 0 && *str == '0')
@@ -109,7 +110,9 @@ char		*ft_add_pad(char *str, t_str_fmt *fmt_struc)
 		return (str_w_0pad);
 	}
 	else if (fmt_struc->wid >= str_len && str_len >= fmt_struc->pre)
+	{
 		return (ft_wid_len_pre(fmt_struc, str_len, str));
+	}
 	else if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= str_len)
 	{
 		pad = ft_set_pad(fmt_struc, str_len);
