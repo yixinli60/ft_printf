@@ -29,7 +29,8 @@ OBJECTS	= $(FILENAMES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJECTS) $(LIBFT)
-	ar -rc $@ $^
+	cp $(LIBFT) $@
+	ar -rc $@ $(OBJECTS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -I . -I ./src/libft -o $@ $<
