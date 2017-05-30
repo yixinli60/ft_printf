@@ -16,24 +16,14 @@
 int	ft_parse_fmt(va_list ap, char **format)
 {
 	t_str_fmt	fmt_struc;
-	static int	len;
 
-	len = 0;
-	if (**format == '%')
-	{
-		write(1, "%", 1);
-		(*format)++;
-		len++;
-		return (len);
-	}
 	ft_memset(&fmt_struc, 0, sizeof(fmt_struc));
-	parse_format(*format, &fmt_struc);
-		//(*format)++;
+	parse_format(format, &fmt_struc);
 	parse_width(format, &fmt_struc);
 	parse_precision(format, &fmt_struc);
 	parse_lm(format, &fmt_struc);
 	parse_conv(ap, format, &fmt_struc);
-	return (len);
+	return (0);
 }
 
 int		ft_printf(char *format, ...)

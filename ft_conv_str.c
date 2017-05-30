@@ -20,6 +20,7 @@ void	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	char		*string;
 
 	i = va_arg(ap, intmax_t);
+
 	if (fmt_struc->length_mod == LENMOD_H)
 		i = (short)i;
 	else if (fmt_struc->length_mod == LENMOD_HH)
@@ -60,7 +61,7 @@ void	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
 	else if (fmt_struc->length_mod == LENMOD_Z)
 		i = (size_t)i;
 	else
-		i = (uintmax_t)i;
+		i = (unsigned int)i;
 	string = ft_add_pad(ft_itoa(i), fmt_struc);
 	write(1, string, ft_strlen(string));
 }
@@ -75,7 +76,16 @@ void	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 		i = (long)i;
 	if (i == 0)
 	{
-		write(1, "", 1);
+		if (fmt_struc->wid > 0)
+		{
+			while (fmt_struc->wid != 1)
+			{
+				write(1, " ", 1);
+				fmt_struc->wid--;
+			}
+		}
+		else
+			write(1, "", 1);
 		return ;
 	}
 	str[0] = i;
@@ -200,18 +210,14 @@ void	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 	write(1, string_fin, ft_strlen(string_fin));
 }
 
-void	ft_conv_pct(va_list ap, t_str_fmt *fmt_struc)
+void	ft_conv_pct(char **fmt, t_str_fmt *fmt_struc)
 {
-	int		i;
 	char	str[2];
 	char	*string;
 
-	i = va_arg(ap, int);
-	str[0] = i;
+	str[0] = '%';
 	str[1] = '\0';
-	string = ft_add_pad(str, fmt_struc);
-	printf("str is |%s|\n", string);
-
+	string = ft_handle_pct(str, fmt_struc);
 	write(1, string, ft_strlen(string));
-
+	(*fmt)++;
 }

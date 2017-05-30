@@ -13,18 +13,37 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-int		parse_format(char *format, t_str_fmt *fmt_struc)
+int		parse_format(char **fmt, t_str_fmt *fmt_struc)
 {
-	if (*format == '#')
-		return (fmt_struc->flag.hash = 1);
-	else if (*format == '-')
-		return (fmt_struc->flag.minus = 1);
-	else if (*format == '+')
-		return (fmt_struc->flag.plus = 1);
-	else if (*format == ' ')
-		return (fmt_struc->flag.space = 1);
-	else if (*format == '0')
-		return (fmt_struc->flag.zero = 1);
+	while (**fmt == '#' || **fmt == '-' || **fmt == '+'
+			|| **fmt == ' ' || **fmt == '0')
+	{
+		if (**fmt == '#')
+		{
+			(*fmt)++;
+			fmt_struc->flag.hash = 1;
+		}
+	 	else if (**fmt == '-')
+		{
+			(*fmt)++;
+			fmt_struc->flag.minus = 1;
+		}
+		else if (**fmt == '+')
+		{
+			(*fmt)++;
+			fmt_struc->flag.plus = 1;
+		}
+		else if (**fmt == ' ')
+		{
+			(*fmt)++;
+			fmt_struc->flag.space = 1;
+		}
+		else if (**fmt == '0')
+		{
+			(*fmt)++;
+			fmt_struc->flag.zero = 1;
+		}
+	}
 	return (0);
 }
 
@@ -91,6 +110,7 @@ int		parse_lm(char **format, t_str_fmt *fmt_struc)
 
 void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 {
+	fmt_struc->conv = **fmt;
 	if (**fmt == 'd' || **fmt == 'i' || **fmt == 'D')
 	{
 		if (**fmt == 'D')
@@ -121,9 +141,8 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	else if (**fmt == 'x' || **fmt == 'X')
 	{
 		fmt_struc->hex = 1;
-		//if (**fmt == 'X')
-		//{
-		//	fmt_struc->length_mod = LENMOD_L;
+		if (**fmt == 'X')
+			//	fmt_struc->length_mod = LENMOD_L;
 			fmt_struc->cap = 1;
 	//	}
 		ft_conv_xstr(ap, fmt_struc);
@@ -137,7 +156,9 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	else if (**fmt == 'p')
 		ft_conv_p(ap, fmt_struc);
 	else if (**fmt == '%')
-		ft_conv_pct(ap, fmt_struc);
-	fmt_struc->conv = **fmt;
+	{
+		ft_conv_pct(fmt, fmt_struc);
+		return ;
+	}
 	(*fmt)++;
 }

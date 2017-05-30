@@ -46,7 +46,7 @@ typedef struct	s_str_fmt
 int 			ft_parse_fmt(va_list ap, char **format);
 int				ft_printf(char *format, ...);
 
-int				parse_format(char *format, t_str_fmt *fmt_struc);
+int				parse_format(char **format, t_str_fmt *fmt_struc);
 int				parse_width(char **format, t_str_fmt *fmt_struc);
 int				parse_precision(char **format, t_str_fmt *fmt_struc);
 int				parse_lm(char **format, t_str_fmt *fmt_struc);
@@ -68,11 +68,13 @@ void 			ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc);
 void 			ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc);
 void 			ft_conv_p(va_list ap, t_str_fmt *fmt_struc);
 void			ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc);
-void			ft_conv_pct(va_list ap, t_str_fmt *fmt_struc);
+void			ft_conv_pct(char **format, t_str_fmt *fmt_struc);
 
 void			ft_swa(char *a, char *b);
 void			rev_str(char *str, int len);
 char			*ft_handle_str(char *str, t_str_fmt *fmt_struc);
 
 char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
+char			*ft_handle_pct(char *str, t_str_fmt *fmt_struc);
+
 #endif
