@@ -28,44 +28,26 @@ OBJECTS	= $(FILENAMES:.c=.o)
 
 all: $(NAME)
 
-#$(NAME): $(OBJECTS) $(LIBFT)
-#	cp $(LIBFT) $@
-#	ar -rc $@ $(OBJECTS)
-
-#%.o: %.c
-#	$(CC) $(CFLAGS) -c -I . -I ./src/libft -o $@ $<
-
-#$(LIBFT): force
-#	$(MAKE) -C $(LIBFT_DIR)
-
-#force:
-#	true
-
-#clean:
-#	/bin/rm -f $(OBJECTS)
-
-#fclean: clean
-#		cd ./src/libft && make fclean
-#		cd ../
-#		/bin/rm -f $(NAME)
-
-
-$(NAME): $(OBJECTS) $(LIBFT_DIR)/libft.a
-	cp $(LIBFT_DIR)/libft.a $@
+$(NAME): $(OBJECTS) $(LIBFT)
+	cp $(LIBFT) $@
 	ar -rc $@ $(OBJECTS)
-#	ranlib $@
 
 %.o: %.c
-	gcc $(CFLAGS) -c -I . -I $(LIBFT_DIR)/libft -o $@ $<
+	$(CC) $(CFLAGS) -c -I . -I ./src/libft -o $@ $<
 
-./src/libft/libft.a:
+$(LIBFT): force
 	$(MAKE) -C $(LIBFT_DIR)
 
-clean:
-	rm -f $(OBJECTS)
-	cd $(LIBFT_DIR) && $(MAKE) fclean
-fclean: clean
-	rm -f $(NAME)
-re: fclean all
+force:
+	true
 
-.PHONY: clean fclean re ./libft/libft.a
+clean:
+	/bin/rm -f $(OBJECTS)
+	cd $(LIBFT_DIR) && make clean
+
+fclean: clean
+	cd ./src/libft && make fclean
+	cd ../
+	/bin/rm -f $(NAME)
+
+re: fclean all
