@@ -15,12 +15,17 @@
 
 int	main(void)
 {
-  int len = 0;
-  int leng = 0;
-
 //long nbr = 4294967296;
-  leng = printf("@moulitest: |%5.x| |%5.0x|\n", 0, 0);
-  len = ft_printf("@moulitest: |%5.x| |%5.0x|", 0, 0);
+  printf("@moulitest: |%#.x| |%#.0x|\n", 0, 0);
+  ft_printf("@moulitest: |%#.x| |%#.0x|\n", 0, 0);
+
+  printf("@moulitest: |%#0.5x| |%#5.0x|\n", 0, 0);
+  ft_printf("@moulitest: |%#0.5x| |%#5.0x|\n", 0, 0);
+
+  printf("@moulitest: |%#10.5x| |%#5.10x|\n", 0, 0);
+  ft_printf("@moulitest: |%#10.5x| |%#5.10x|\n", 0, 0);
+
+
 //  printf("leng is %d\n", leng);
 //  printf("len is %d\n", len);
 /*

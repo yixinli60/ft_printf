@@ -14,6 +14,9 @@ NAME = libftprintf.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
+LIBFT_DIR = ./src/libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
 FILENAMES = ft_printf.c \
 	ft_conv_str.c \
 	ft_handle_str.c \
@@ -25,13 +28,17 @@ OBJECTS	= $(FILENAMES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	cd src/libft && make && make clean
-	cp ./src/libft/libft.a $@
-	ar -rc $@ $(OBJECTS)
+$(NAME): $(OBJECTS) $(LIBFT)
+	ar -rc $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -I . -I ./src/libft -o $@ $<
+
+$(LIBFT): force
+	$(MAKE) -C $(LIBFT_DIR)
+
+force:
+	true
 
 clean:
 	/bin/rm -f $(OBJECTS)

@@ -45,32 +45,31 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 
 	if (*str == '0')
 	{
-		if (fmt_struc->wid)
+		if (fmt_struc->pre <= 0)
 		{
-			if (fmt_struc->pre == 0)
+			if (fmt_struc->wid)
 			{
 				if (!(pad = malloc(sizeof(char) * (fmt_struc->wid + 1))))
-				return (0);
+					return (0);
 				ft_memset(pad, ' ', fmt_struc->wid);
 				pad[fmt_struc->wid + 1] = '\0';
 				return (pad);
 			}
 			else
 			{
-				if (!(pad = malloc(sizeof(char) * (fmt_struc->wid))))
-				return (0);
-			ft_memset(pad, ' ', fmt_struc->wid - 1);
+				if (!(pad = malloc(sizeof(char) * 1)))
+					return (0);
+				pad[0] = '\0';
+				return (pad);
 			}
-			str_w_0pad = ft_mflag(str, pad, fmt_struc);
 		}
 		else
 		{
-			if (!(pad = malloc(sizeof(char) * 2)))
+			if (!(pad = malloc(sizeof(char) * (fmt_struc->wid + 1))))
 				return (0);
-			pad[0] = '0';
-			pad[1] = '\0';
+			ft_memset(pad, ' ', fmt_struc->wid);
+			pad[fmt_struc->wid + 1] = '\0';
 		}
-		return (pad);
 	}
 	if (fmt_struc->pre >= str_len && fmt_struc->pre >= fmt_struc->wid)
 	{
@@ -79,7 +78,9 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 		{
 			if (!(hash_pad = malloc(sizeof(char) * (ft_strlen(pad) + 3))))
 				return (0);
+			//	printf("pad is %s\n", pad);
 			hash_pad = ft_strjoin("0x", pad);
+			printf("pad is %s\n", hash_pad);
 			str_w_0pad = ft_add_signs(ft_strcat(hash_pad, str), fmt_struc);
 		}
 		else
