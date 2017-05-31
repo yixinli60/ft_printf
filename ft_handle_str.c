@@ -74,7 +74,6 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 			{
 				if (!(pad = malloc(sizeof(char) * 1)))
 					return (0);
-				//pad[0] = '0';
 				pad[0] = '\0';
 				return (pad);
 			}

@@ -15,9 +15,10 @@
 
 int	ft_parse_fmt(va_list ap, char **format)
 {
-	int len = 0;
+	int			len;
 	t_str_fmt	fmt_struc;
 
+	len = 0;
 	ft_memset(&fmt_struc, 0, sizeof(fmt_struc));
 	parse_format(format, &fmt_struc);
 	parse_width(format, &fmt_struc);
@@ -28,14 +29,14 @@ int	ft_parse_fmt(va_list ap, char **format)
 	return (len);
 }
 
-int		ft_printf(char *format, ...)
+int	ft_printf(char *format, ...)
 {
-	va_list		ap;
+	va_list	ap;
 	int		len;
 
 	len = 0;
 	va_start(ap, format);
-	while(*format)
+	while (*format)
 	{
 		if (*format == '%')
 		{

@@ -16,9 +16,14 @@
 int	main(void)
 {
 
- printf("|%#08x|\n", 42);
- ft_printf("|%#08x|\n", 42);
+// printf("|%#08x|\n", 42);
+// ft_printf("|%#08x|\n", 42);
 
+// printf("@moulitest: |%#.o| |%#.0o|", 0, 0);
+// ft_printf("@moulitest: |%#.o| |%#.0o|", 0, 0);
+
+ printf("|%ls|\n", L"test"); //prints test
+ ft_printf("|%ls|\n", L"test"); // prints t
   /*
 //long nbr = 4294967296;
 

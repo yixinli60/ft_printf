@@ -13,7 +13,7 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-int		parse_format(char **fmt, t_str_fmt *fmt_struc)
+void		parse_format(char **fmt, t_str_fmt *fmt_struc)
 {
 	while (**fmt == '#' || **fmt == '-' || **fmt == '+'
 			|| **fmt == ' ' || **fmt == '0')
@@ -44,7 +44,6 @@ int		parse_format(char **fmt, t_str_fmt *fmt_struc)
 			fmt_struc->flag.zero = 1;
 		}
 	}
-	return (0);
 }
 
 int		parse_width(char **format, t_str_fmt *fmt_struc)
@@ -111,43 +110,16 @@ int		parse_lm(char **format, t_str_fmt *fmt_struc)
 int	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 {
 	static int len;
+
 	len = 0;
 	fmt_struc->conv = **fmt;
-	if (**fmt == 'd' || **fmt == 'i' || **fmt == 'D')
-	{
-		if (**fmt == 'D')
-			fmt_struc->length_mod = LENMOD_L;
-		return(len = ft_conv_dstr(ap, fmt_struc));
-	}
-	else if (**fmt == 'u' || **fmt == 'U')
-	{
-		if (**fmt == 'U')
-			fmt_struc->length_mod = LENMOD_L;
-		return(len = ft_conv_ustr(ap, fmt_struc));
-	}
+	if (ft_strchr("dDioOuUxX", **fmt))
+		return(parse_dioux(ap, fmt, fmt_struc));
 	else if (**fmt == 'c' || **fmt == 'C')
 	{
 		if (**fmt == 'C')
 			fmt_struc->length_mod = LENMOD_L;
 		return(len = ft_conv_cstr(ap, fmt_struc));
-	}
-	else if (**fmt == 'o' || **fmt == 'O')
-	{
-		if (**fmt == 'O')
-		{
-			fmt_struc->length_mod = LENMOD_L;
-			fmt_struc->cap = 1;
-		}
-		return(len = ft_conv_ostr(ap, fmt_struc));
-	}
-	else if (**fmt == 'x' || **fmt == 'X')
-	{
-		fmt_struc->hex = 1;
-		if (**fmt == 'X')
-			//	fmt_struc->length_mod = LENMOD_L;
-			fmt_struc->cap = 1;
-	//	}
-		return(len = ft_conv_xstr(ap, fmt_struc));
 	}
 	else if (**fmt == 's' || **fmt == 'S')
 	{
@@ -158,8 +130,42 @@ int	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	else if (**fmt == 'p')
 		return(len = ft_conv_p(ap, fmt_struc));
 	else if (**fmt == '%')
-	{
 		return(len = ft_conv_pct(fmt_struc));
+	return (len);
+}
+
+int		parse_dioux(va_list ap, char **fmt, t_str_fmt *fmt_struc)
+{
+	int	len;
+
+	len = 0;
+	if (**fmt == 'd' || **fmt == 'i' || **fmt == 'D')
+	{
+		if (**fmt == 'D')
+			fmt_struc->length_mod = LENMOD_L;
+		return(len = ft_conv_dstr(ap, fmt_struc));
+	}
+	else if (**fmt == 'o' || **fmt == 'O')
+	{
+		if (**fmt == 'O')
+		{
+			fmt_struc->length_mod = LENMOD_L;
+			fmt_struc->cap = 1;
+		}
+		return(len = ft_conv_ostr(ap, fmt_struc));
+	}
+	else if (**fmt == 'u' || **fmt == 'U')
+	{
+		if (**fmt == 'U')
+			fmt_struc->length_mod = LENMOD_L;
+		return(len = ft_conv_ustr(ap, fmt_struc));
+	}
+	else if (**fmt == 'x' || **fmt == 'X')
+	{
+		fmt_struc->hex = 1;
+		if (**fmt == 'X')
+			fmt_struc->cap = 1;
+		return(len = ft_conv_xstr(ap, fmt_struc));
 	}
 	return (len);
 }

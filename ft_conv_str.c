@@ -106,7 +106,7 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 	char	*string;
 	char	*final_str;
 
-	i = va_arg(ap, char *);
+	i = va_arg(ap, char*);
 	if (i == NULL)
 	{
 		write(1, "(null)", 6);
