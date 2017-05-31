@@ -51,12 +51,13 @@ char		*ft_wid_len_pre(t_str_fmt *fmt_struc, int int_len, char *str)
 	char	*pad;
 	char	*str_w_pad;
 	char	*string_0x;
-
+printf("str is |%s|\n", str);
 	if (fmt_struc->flag.plus || fmt_struc->flag.space || fmt_struc->neg_nbr)
 		int_len = int_len + 1;
 	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - int_len + 1))))
 		return (0);
-	if (fmt_struc->pre == -1 && fmt_struc->flag.zero && !fmt_struc->flag.minus)
+	if (fmt_struc->pre == -1 && fmt_struc->flag.zero && !fmt_struc->flag.minus
+		&& ((fmt_struc->conv != 'x') || (fmt_struc->conv != 'X')))
 	{
 		ft_memset(pad, '0', (fmt_struc->wid - int_len));
 		pad[(fmt_struc->wid - int_len)] = '\0';

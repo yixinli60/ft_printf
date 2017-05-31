@@ -16,6 +16,9 @@
 int	main(void)
 {
 
+ printf("|%#08x|\n", 42);
+ ft_printf("|%#08x|\n", 42);
+
   /*
 //long nbr = 4294967296;
 

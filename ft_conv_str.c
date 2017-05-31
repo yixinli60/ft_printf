@@ -72,7 +72,9 @@ int	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 	int		i;
 	char	str[2];
 	char	*string;
+	int		width;
 
+	width = fmt_struc->wid;
 	i = va_arg(ap, int);
 	if (fmt_struc->length_mod == LENMOD_L)
 		i = (long)i;
@@ -85,10 +87,11 @@ int	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 				write(1, " ", 1);
 				fmt_struc->wid--;
 			}
+			return (width);
 		}
 		else
 			write(1, "", 1);
-		return (2);
+		return (1);
 	}
 	str[0] = i;
 	str[1] = '\0';
@@ -190,7 +193,7 @@ int	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 	if (fmt_struc->cap == 1)
 		ft_strtoupper(string_fin);
 	write(1, string_fin, ft_strlen(string_fin));
-	free(str);
+	//free(str);
 	return (ft_strlen(string_fin));
 }
 
