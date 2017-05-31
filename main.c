@@ -15,20 +15,21 @@
 
 int	main(void)
 {
-  wchar_t wc = L'\x3b1';
-//long nbr = 4294967296;
-printf("|%ls|\n", wc);
-ft_printf("|%ls|\n", wc);
 
-/*
+  /*
+//long nbr = 4294967296;
+
+printf("@moulitest: |%#.o| |%#.0o|\n", 0, 0);
+ft_printf("@moulitest: |%#.o| |%#.0o|\n", 0, 0);
+
 printf("@moulitest: |%#5.o| |%#.0o|\n", 0, 0);
 ft_printf("@moulitest: |%#5.o| |%#.0o|\n", 0, 0);
 
-  printf("@moulitest: |%#0.5x| |%#5.0x|\n", 0, 0);
-  ft_printf("@moulitest: |%#0.5x| |%#5.0x|\n", 0, 0);
+printf("@moulitest: |%#0.5x| |%#5.0x|\n", 0, 0);
+ft_printf("@moulitest: |%#0.5x| |%#5.0x|\n", 0, 0);
 
-  printf("@moulitest: |%#-10.5x| |%#5.10x|\n", 0, 0);
-  ft_printf("@moulitest: |%#-10.5x| |%#5.10x|\n", 0, 0);
+printf("@moulitest: |%#-10.5x| |%#5.10x|\n", 0, 0);
+ft_printf("@moulitest: |%#-10.5x| |%#5.10x|\n", 0, 0);
 
 
 //  printf("leng is %d\n", leng);

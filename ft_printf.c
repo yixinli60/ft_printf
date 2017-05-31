@@ -15,6 +15,7 @@
 
 int	ft_parse_fmt(va_list ap, char **format)
 {
+	int len = 0;
 	t_str_fmt	fmt_struc;
 
 	ft_memset(&fmt_struc, 0, sizeof(fmt_struc));
@@ -22,8 +23,9 @@ int	ft_parse_fmt(va_list ap, char **format)
 	parse_width(format, &fmt_struc);
 	parse_precision(format, &fmt_struc);
 	parse_lm(format, &fmt_struc);
-	parse_conv(ap, format, &fmt_struc);
-	return (0);
+	len = parse_conv(ap, format, &fmt_struc);
+	(*format)++;
+	return (len);
 }
 
 int		ft_printf(char *format, ...)
@@ -38,7 +40,7 @@ int		ft_printf(char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			len = ft_parse_fmt(ap, &format);
+			len = len + ft_parse_fmt(ap, &format);
 		}
 		else
 		{
@@ -49,5 +51,4 @@ int		ft_printf(char *format, ...)
 	}
 	va_end(ap);
 	return (len);
-
 }

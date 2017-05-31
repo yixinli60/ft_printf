@@ -20,6 +20,14 @@ char	*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
 	int		width;
 
 	width = fmt_struc->wid;
+	if (fmt_struc->pre == 0)
+	{
+		if (!(pad = malloc(sizeof(char) * (width + 1))))
+			return (0);
+		ft_memset(pad, ' ', (width));
+		pad[(width + 1)] = '\0';
+		return(pad);
+	}
 	if (width > (int)ft_strlen(str_w_0pad))
 	{
 		if (!(pad = malloc(sizeof(char) * (width - ft_strlen(str_w_0pad) + 1))))

@@ -108,26 +108,28 @@ int		parse_lm(char **format, t_str_fmt *fmt_struc)
 	return (0);
 }
 
-void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
+int	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 {
+	static int len;
+	len = 0;
 	fmt_struc->conv = **fmt;
 	if (**fmt == 'd' || **fmt == 'i' || **fmt == 'D')
 	{
 		if (**fmt == 'D')
 			fmt_struc->length_mod = LENMOD_L;
-		ft_conv_dstr(ap, fmt_struc);
+		return(len = ft_conv_dstr(ap, fmt_struc));
 	}
 	else if (**fmt == 'u' || **fmt == 'U')
 	{
 		if (**fmt == 'U')
 			fmt_struc->length_mod = LENMOD_L;
-		ft_conv_ustr(ap, fmt_struc);
+		return(len = ft_conv_ustr(ap, fmt_struc));
 	}
 	else if (**fmt == 'c' || **fmt == 'C')
 	{
 		if (**fmt == 'C')
 			fmt_struc->length_mod = LENMOD_L;
-		ft_conv_cstr(ap, fmt_struc);
+		return(len = ft_conv_cstr(ap, fmt_struc));
 	}
 	else if (**fmt == 'o' || **fmt == 'O')
 	{
@@ -136,7 +138,7 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 			fmt_struc->length_mod = LENMOD_L;
 			fmt_struc->cap = 1;
 		}
-		ft_conv_ostr(ap, fmt_struc);
+		return(len = ft_conv_ostr(ap, fmt_struc));
 	}
 	else if (**fmt == 'x' || **fmt == 'X')
 	{
@@ -145,20 +147,19 @@ void	parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 			//	fmt_struc->length_mod = LENMOD_L;
 			fmt_struc->cap = 1;
 	//	}
-		ft_conv_xstr(ap, fmt_struc);
+		return(len = ft_conv_xstr(ap, fmt_struc));
 	}
 	else if (**fmt == 's' || **fmt == 'S')
 	{
 		if (**fmt == 'S')
 			fmt_struc->length_mod = LENMOD_L;
-		ft_conv_sstr(ap, fmt_struc);
+		return(len = ft_conv_sstr(ap, fmt_struc));
 	}
 	else if (**fmt == 'p')
-		ft_conv_p(ap, fmt_struc);
+		return(len = ft_conv_p(ap, fmt_struc));
 	else if (**fmt == '%')
 	{
-		ft_conv_pct(fmt, fmt_struc);
-		return ;
+		return(len = ft_conv_pct(fmt_struc));
 	}
-	(*fmt)++;
+	return (len);
 }

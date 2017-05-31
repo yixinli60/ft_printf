@@ -97,7 +97,6 @@ char		*ft_add_pad(char *str, t_str_fmt *fmt_struc)
 	char	*pad;
 	char	*str_w_0pad;
 	int		str_len;
-	//printf("str is |%s|\n", str);
 
 	str_len = ft_strlen(str);
 	if (fmt_struc->pre == 0 && *str == '0')

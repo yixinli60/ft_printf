@@ -13,14 +13,13 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-void	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
+int	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	intmax_t	i;
 	intmax_t	nbr;
 	char		*string;
 
 	i = va_arg(ap, intmax_t);
-
 	if (fmt_struc->length_mod == LENMOD_H)
 		i = (short)i;
 	else if (fmt_struc->length_mod == LENMOD_HH)
@@ -40,9 +39,10 @@ void	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	nbr = ft_absval(i);
 	string = ft_add_pad(ft_itoa(nbr), fmt_struc);
 	write(1, string, ft_strlen(string));
+	return (ft_strlen(string));
 }
 
-void	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
+int	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*string;
@@ -64,8 +64,10 @@ void	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
 		i = (unsigned int)i;
 	string = ft_add_pad(ft_itoa(i), fmt_struc);
 	write(1, string, ft_strlen(string));
+	return (ft_strlen(string));
 }
-void	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
+
+int	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	int		i;
 	char	str[2];
@@ -86,15 +88,16 @@ void	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 		}
 		else
 			write(1, "", 1);
-		return ;
+		return (2);
 	}
 	str[0] = i;
 	str[1] = '\0';
 	string = ft_add_pad(str, fmt_struc);
 	write(1, string, ft_strlen(string));
+	return (ft_strlen(string));
 }
 
-void	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
+int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	char	*i;
 	char	*string;
@@ -104,27 +107,26 @@ void	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 	if (i == NULL)
 	{
 		write(1, "(null)", 6);
-		return ;
+		return (6);
 	}
-	if (fmt_struc->length_mod == LENMOD_L)
-		i = (wchar_t)i;
 	if ((int)ft_strlen(i) > fmt_struc->pre && fmt_struc->pre > 0)
 	{
 		if (!(string = malloc(sizeof(char) * (fmt_struc->pre))))
-			return ;
+			return (0);
 		ft_strncpy(string, i, fmt_struc->pre);
 	}
 	else
 	{
 		if (!(string = malloc(sizeof(char) * (ft_strlen(i) + 1))))
-			return ;
+			return (0);
 		string = i;
 	}
 	final_str = ft_handle_str(string, fmt_struc);
 	write(1, final_str, ft_strlen(final_str));
+	return (ft_strlen(final_str));
 }
 
-void	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
+int	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*string_fin;
@@ -132,7 +134,7 @@ void	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 	char		*string_0;
 
 	if (!(str = malloc(sizeof(char) * 20)))
-		return ;
+		return (0);
 	i = va_arg(ap, uintmax_t);
 	if (fmt_struc->length_mod == LENMOD_H)
 		i = (unsigned short)i;
@@ -149,7 +151,7 @@ void	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 	else
 		i = (unsigned int)i;
 	ft_itoa_base(i, str, 8);
-	if (fmt_struc->flag.hash)
+	if (fmt_struc->flag.hash && str != 0)
 		string_0 = ft_strjoin("0", str);
 	else
 		string_0 = str;
@@ -157,16 +159,17 @@ void	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 		ft_strtoupper(string_0);
 	string_fin = ft_add_pad(string_0, fmt_struc);
 	write(1, string_fin, ft_strlen(string_fin));
+	return (ft_strlen(string_fin));
 }
 
-void	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
+int	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*string_fin;
 	char		*str;
 
 	if (!(str = malloc(sizeof(char) * 20)))
-		return ;
+		return (0);
 	i = va_arg(ap, uintmax_t);
 	if (fmt_struc->length_mod == LENMOD_H)
 		i = (unsigned short)i;
@@ -188,9 +191,10 @@ void	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 		ft_strtoupper(string_fin);
 	write(1, string_fin, ft_strlen(string_fin));
 	free(str);
+	return (ft_strlen(string_fin));
 }
 
-void	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
+int	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*str;
@@ -198,7 +202,7 @@ void	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 	char *string_fin;
 
 	if (!(str = malloc(sizeof(char) * 20)))
-		return ;
+		return (0);
 	i = va_arg(ap, uintmax_t);
 	if (i == 0)
 		str = "0";
@@ -210,9 +214,10 @@ void	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 	string = ft_strjoin("0x", str);
 	string_fin = ft_add_pad(string, fmt_struc);
 	write(1, string_fin, ft_strlen(string_fin));
+	return (ft_strlen(string_fin));
 }
 
-void	ft_conv_pct(char **fmt, t_str_fmt *fmt_struc)
+int	ft_conv_pct(t_str_fmt *fmt_struc)
 {
 	char	str[2];
 	char	*string;
@@ -221,5 +226,5 @@ void	ft_conv_pct(char **fmt, t_str_fmt *fmt_struc)
 	str[1] = '\0';
 	string = ft_handle_pct(str, fmt_struc);
 	write(1, string, ft_strlen(string));
-	(*fmt)++;
+	return (ft_strlen(string));
 }
