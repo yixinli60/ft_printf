@@ -22,8 +22,10 @@ int	main(void)
 // printf("@moulitest: |%#.o| |%#.0o|", 0, 0);
 // ft_printf("@moulitest: |%#.o| |%#.0o|", 0, 0);
 
- printf("|%ls|\n", L"test"); //prints test
- ft_printf("|%ls|\n", L"test"); // prints t
+printf("|%d|\n");
+ft_printf("|%d|\n");
+// printf("|%ls|\n", L"test"); //prints test
+// ft_printf("|%ls|\n", L"test"); // prints t
   /*
 //long nbr = 4294967296;
 

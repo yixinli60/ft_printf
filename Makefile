@@ -18,11 +18,13 @@ LIBFT_DIR = ./src/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 FILENAMES = ft_printf.c \
-	ft_conv_str.c \
+	ft_conv_dioux.c \
+	ft_conv_cps.c \
 	ft_handle_str.c \
 	ft_pad_str.c \
 	parsing.c \
 	printing.c \
+	parse_dioux.c
 
 OBJECTS	= $(FILENAMES:.c=.o)
 

@@ -26,7 +26,7 @@ char	*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
 			return (0);
 		ft_memset(pad, ' ', (width));
 		pad[(width + 1)] = '\0';
-		return(pad);
+		return (pad);
 	}
 	if (width > (int)ft_strlen(str_w_0pad))
 	{
