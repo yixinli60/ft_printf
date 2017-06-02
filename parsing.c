@@ -72,7 +72,7 @@ int		parse_lm(char **format, t_str_fmt *fmt_struc)
 		if (**format == 'h')
 			fmt_struc->length_mod = LENMOD_HH;
 		else
-			return (fmt_struc->length_mod = LENMOD_H);
+			return(fmt_struc->length_mod = LENMOD_H);
 	}
 	else if (**format == 'l')
 	{
@@ -80,7 +80,7 @@ int		parse_lm(char **format, t_str_fmt *fmt_struc)
 		if (**format == 'l')
 			fmt_struc->length_mod = LENMOD_LL;
 		else
-			return (fmt_struc->length_mod = LENMOD_L);
+			return(fmt_struc->length_mod = LENMOD_L);
 	}
 	else if (**format == 'j')
 		fmt_struc->length_mod = LENMOD_J;
@@ -116,5 +116,6 @@ int		parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 		return (len = ft_conv_p(ap, fmt_struc));
 	else if (**fmt == '%')
 		return (len = ft_conv_pct(fmt_struc));
-	return (len);
+	else
+		return (len = parse_other(fmt, fmt_struc));
 }

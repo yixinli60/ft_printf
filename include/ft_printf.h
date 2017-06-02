@@ -80,4 +80,6 @@ char			*ft_handle_str(char *str, t_str_fmt *fmt_struc);
 char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
 char			*ft_handle_pct(char *str, t_str_fmt *fmt_struc);
 
+int				parse_other(char **fmt, t_str_fmt *fmt_struc);
+
 #endif

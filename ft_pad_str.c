@@ -13,8 +13,8 @@
 /*
 ** pre_str_zero
 ** when both precision and string are "0"
-** malloc pad of size width, if plus flag is present
-** if plus flag is not, return empty string of width size
+** if plus flag is present, malloc pad of size width
+** if not, return empty string of width size
 */
 
 #include "src/libft/libft.h"
@@ -51,7 +51,7 @@ char		*ft_wid_len_pre(t_str_fmt *fmt_struc, int int_len, char *str)
 	char	*pad;
 	char	*str_w_pad;
 	char	*string_0x;
-	
+
 	if (fmt_struc->flag.plus || fmt_struc->flag.space || fmt_struc->neg_nbr)
 		int_len = int_len + 1;
 	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - int_len + 1))))
@@ -105,7 +105,6 @@ char		*ft_add_pad(char *str, t_str_fmt *fmt_struc)
 	{
 		pad = ft_set_pad(fmt_struc, str_len);
 		str_w_0pad = ft_add_signs(ft_strcat(pad, str), fmt_struc);
-		//free(pad);
 		return (str_w_0pad);
 	}
 	else if (fmt_struc->wid >= str_len && str_len >= fmt_struc->pre)

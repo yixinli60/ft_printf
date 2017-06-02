@@ -38,3 +38,24 @@ int	parse_dioux(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	}
 	return (0);
 }
+
+int parse_other(char **fmt, t_str_fmt *fmt_struc)
+{
+	int len;
+	int width;
+	char *pad;
+	char *string = NULL;
+
+	width = fmt_struc->wid;
+	if (!(pad = malloc(sizeof(char) * (width - 1))))
+		return (0);
+	ft_memset(pad, ' ', (width - 1));
+	pad[width] = '\0';
+	len = 0;
+	printf("pad is |%s|\n", pad);
+
+	string = ft_mflag(*fmt, pad, fmt_struc);
+	printf("string is |%s|\n", string);
+	write(1, string, ft_strlen(string));
+	return (1);
+}
