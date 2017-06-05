@@ -81,5 +81,8 @@ char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
 char			*ft_handle_pct(char *str, t_str_fmt *fmt_struc);
 
 int				parse_other(char **fmt, t_str_fmt *fmt_struc);
+char			*ft_handle_oct(char *str, t_str_fmt *fmt_struc);
 
+int				ft_conv_wsstr(va_list ap);
+int				ft_conv_wcstr(va_list ap);
 #endif

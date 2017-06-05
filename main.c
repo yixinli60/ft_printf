@@ -16,6 +16,37 @@
 int	main(void)
 {
 
+/*int len = 0;
+int leng = 0;
+  len = printf("|5%|\n");
+  leng = ft_printf("|5 %|\n");
+printf("len is %d\n", len);
+printf("leng is %d\n", leng);
+*/
+//printf("|%.p|, |%.0p|\n", 0, 0);
+//ft_printf("|%.p|, |%.0p|\n", 0, 0);
+
+//printf("real: |%S|\n", L"Á±≥");
+//ft_printf("mine: |%S|\n", L"Á±≥");
+
+//printf("%ls\n", L"test"); //prints test
+//ft_printf("%ls\n", L"test"); // prints t
+
+
+/*
+printf("|%#08x|\n", 42);
+ft_printf("|%#08x|\n\n", 42);
+
+printf("|%#8.5x|\n", 42);
+ft_printf("|%#8.5x|\n\n", 42);
+
+printf("|%#08.9x|\n", 42);
+ft_printf("|%#08.9x|\n\n", 42);
+
+printf("|%#0.x|\n", 42);
+ft_printf("|%#0.x|\n\n", 42);
+
+
 //printf("%d, {10R}, %s\n", 10, "HELLO"); //moulitest 50 shows error????
 //ft_printf("%d, {10R}, %s\n\n", 10, "HELLO");
 
@@ -31,26 +62,12 @@ ft_printf("|%#o|\n\n", 0);    //|00|
 printf("|%#5x|\n", 0);        // |    0|
 ft_printf("|%#5x|\n\n", 0);   // |0|
 
-printf("@moulitest: |%#.o| |%#.0o|\n", 0, 0);       //@moulitest: |0| |0|
-ft_printf("@moulitest: |%#.o| |%#.0o|\n\n", 0, 0);  //@moulitest: || ||
-
 
 // printf("|%ls|\n", L"test"); //prints test
 // ft_printf("|%ls|\n", L"test"); // prints t
-  /*
+
 //long nbr = 4294967296;
 
-printf("@moulitest: |%#.o| |%#.0o|\n", 0, 0);
-ft_printf("@moulitest: |%#.o| |%#.0o|\n", 0, 0);
-
-printf("@moulitest: |%#5.o| |%#.0o|\n", 0, 0);
-ft_printf("@moulitest: |%#5.o| |%#.0o|\n", 0, 0);
-
-printf("@moulitest: |%#0.5x| |%#5.0x|\n", 0, 0);
-ft_printf("@moulitest: |%#0.5x| |%#5.0x|\n", 0, 0);
-
-printf("@moulitest: |%#-10.5x| |%#5.10x|\n", 0, 0);
-ft_printf("@moulitest: |%#-10.5x| |%#5.10x|\n", 0, 0);
 
 
 printf("leng is %d\n", leng);

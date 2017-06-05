@@ -71,11 +71,9 @@ int	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*string_fin;
-	char		*str;
+	char		str[100];
 	char		*string_0;
 
-	if (!(str = malloc(sizeof(char) * 20)))
-		return (0);
 	i = va_arg(ap, uintmax_t);
 	if (fmt_struc->length_mod == LENMOD_H)
 		i = (unsigned short)i;
@@ -92,7 +90,7 @@ int	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 	else
 		i = (unsigned int)i;
 	ft_itoa_base(i, str, 8);
-	if (fmt_struc->flag.hash && str != 0)
+	if (fmt_struc->flag.hash && (str[0] != '0'))
 		string_0 = ft_strjoin("0", str);
 	else
 		string_0 = str;
@@ -107,10 +105,8 @@ int	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*string_fin;
-	char		*str;
+	char		str[100];
 
-	if (!(str = malloc(sizeof(char) * 20)))
-		return (0);
 	i = va_arg(ap, uintmax_t);
 	if (fmt_struc->length_mod == LENMOD_H)
 		i = (unsigned short)i;

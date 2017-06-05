@@ -100,5 +100,6 @@ size_t				ft_get_int_len(size_t l);
 intmax_t			ft_absval(intmax_t nbr);
 char				*ft_itoa_base(uintmax_t nbr, char *str, uintmax_t base);
 void				ft_to_upper(char *str);
+size_t				ft_wstrlen(const wchar_t *s);
 
 #endif

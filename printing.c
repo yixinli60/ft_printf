@@ -16,6 +16,9 @@
 char	*ft_add_signs(char *str, t_str_fmt *fmt_struc)
 {
 	char *string;
+	
+	if (fmt_struc->flag.hash && fmt_struc->hex)
+		str[1] = 'x';
 	if (fmt_struc->conv == 'u' || fmt_struc->conv == 'U')
 		return (str);
 	if (!(string = malloc(sizeof(char) * (ft_strlen(str) + 2))))
@@ -29,14 +32,20 @@ char	*ft_add_signs(char *str, t_str_fmt *fmt_struc)
 	else if (fmt_struc->flag.plus)
 	{
 		string = ft_strjoin("+", str);
+		//free(str);
 		return (string);
 	}
 	else if (fmt_struc->flag.space)
-		return (string = ft_strjoin(" ", str));
+	{
+		string = ft_strjoin(" ", str);
+		//free(str);
+		return (string);
+	}
 	else if (fmt_struc->flag.zero && fmt_struc->wid > (int)ft_strlen(str) &&
 	fmt_struc->pre > fmt_struc->wid)
 	{
 		string = ft_strjoin("0", str);
+		//free(str);
 		return (string);
 	}
 	return (str);

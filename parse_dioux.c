@@ -39,23 +39,32 @@ int	parse_dioux(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	return (0);
 }
 
-int parse_other(char **fmt, t_str_fmt *fmt_struc)
+int	parse_other(char **fmt, t_str_fmt *fmt_struc)
 {
-	int len;
-	int width;
-	char *pad;
-	char *string = NULL;
+	int		width;
+	char	*pad;
+	char	*string;
 
+	string = NULL;
 	width = fmt_struc->wid;
-	if (!(pad = malloc(sizeof(char) * (width - 1))))
-		return (0);
-	ft_memset(pad, ' ', (width - 1));
-	pad[width] = '\0';
-	len = 0;
-	printf("pad is |%s|\n", pad);
-
-	string = ft_mflag(*fmt, pad, fmt_struc);
-	printf("string is |%s|\n", string);
-	write(1, string, ft_strlen(string));
-	return (1);
+	if (!(**fmt >= 65 && **fmt <= 90) || !(**fmt >= 97 && **fmt <= 122))
+	{
+		if (!(pad = malloc(sizeof(char) * (width))))
+			return (0);
+		if (width)
+			ft_memset(pad, ' ', width);
+		pad[width] = '\0';
+		string = ft_mflag(*fmt, pad, fmt_struc);
+		write(1, string, ft_strlen(string));
+		if (width)
+			return (width);
+		else
+			return (1);
+	}
+	else
+	{
+		write(1, *fmt, 1);
+		(*fmt)++;
+		return (1);
+	}
 }

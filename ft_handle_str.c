@@ -35,7 +35,7 @@ char	*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
 		ft_memset(pad, ' ', (width - ft_strlen(str_w_0pad)));
 		pad[(width - ft_strlen(str_w_0pad))] = '\0';
 		str_w_spad = ft_mflag(str_w_0pad, pad, fmt_struc);
-		free(pad);
+		//free(pad);
 		return (str_w_spad);
 	}
 	else
@@ -102,7 +102,7 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 		return (str_w_0pad);
 	}
 	else if (fmt_struc->wid >= str_len && str_len >= fmt_struc->pre)
-		return (ft_wid_len_pre(fmt_struc, str_len, str));
+		return (ft_add_pad(str, fmt_struc));
 	else if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= str_len)
 	{
 		pad = ft_set_pad(fmt_struc, str_len);
@@ -151,3 +151,28 @@ char	*ft_handle_pct(char *str, t_str_fmt *fmt_struc)
 	}
 	return (padded_str);
 }
+/*
+char	*ft_handle_oct(char *str, t_str_fmt *fmt_struc)
+{
+	char *string;
+	char *pad;
+	char *pad_w_0;
+	pad = NULL;
+	string = NULL;
+	if (fmt_struc->flag.hash)
+	{
+		if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - 3))))
+			return (0);
+		ft_memset(pad, '0', (fmt_struc->wid - ft_strlen(str) - 2));
+		pad_w_0 = ft_strjoin("0x", pad);
+		return (string = ft_strjoin(pad_w_0, str));
+	}
+	else
+	{
+		if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - 1))))
+			return (0);
+		ft_memset(pad, '0', (fmt_struc->wid - ft_strlen(str)));
+		return (string = ft_strcat(pad, str));
+	}
+}
+*/
