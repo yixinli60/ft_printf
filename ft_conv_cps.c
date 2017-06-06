@@ -71,12 +71,12 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 	char	*i;
 	char	*string;
 	char	*final_str;
-	int len = 0;
+	int		len;
 
+	len = 0;
 	if (fmt_struc->length_mod == LENMOD_L)
 		return (len = ft_conv_wsstr(ap));
 	i = va_arg(ap, char*);
-
 	if (i == NULL)
 	{
 		write(1, "(null)", 6);
@@ -115,30 +115,31 @@ int	ft_conv_pct(t_str_fmt *fmt_struc)
 int	ft_conv_wsstr(va_list ap)
 {
 	wchar_t *i;
-	wchar_t *N = NULL;
+	wchar_t *n;
 
+	n = NULL;
 	i = va_arg(ap, wchar_t*);
-	if (i == N)
+	if (i == n)
 	{
 		write(1, "(null)", 6);
 		return (6);
 	}
 	else
-		write(1, i, ft_wstrlen(i)* 4);
+		write(1, i, ft_wstrlen(i) * 4);
 	return (0);
 }
 
-int	ft_conv_wcstr(va_list ap)
+int	ft_conv_wcstr(va_list ap, t_str_fmt *fmt_struc)
 {
-	wchar_t i;
+	wchar_t	i;
+	char	*string;
+	char str[2];
 
 	i = va_arg(ap, wchar_t);
-	//if (i == '0')
-	//{
-	//	write(1, "(null)", 6);
-	//	return (6);
-	//}
-	//else
-	write(1, &i, 4);
-	return (1);
+	i = (char)i;
+	str[0] = i;
+	str[1] = '\0';
+	string = ft_add_pad(str, fmt_struc);
+	write(1, string, ft_strlen(string));
+	return (ft_strlen(string));
 }

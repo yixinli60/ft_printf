@@ -103,7 +103,7 @@ int		parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	else if (**fmt == 'c' || **fmt == 'C')
 	{
 		if (**fmt == 'C' || fmt_struc->length_mod == 'l')
-			return (len = ft_conv_wcstr(ap));
+			return (len = ft_conv_wcstr(ap, fmt_struc));
 		return (len = ft_conv_cstr(ap, fmt_struc));
 	}
 	else if (**fmt == 's' || **fmt == 'S')

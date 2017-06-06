@@ -18,7 +18,9 @@ int	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	intmax_t	i;
 	intmax_t	nbr;
 	char		*string;
+	int len;
 
+	len = 0;
 	i = va_arg(ap, intmax_t);
 	if (fmt_struc->length_mod == LENMOD_H)
 		i = (short)i;
@@ -38,8 +40,10 @@ int	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 		fmt_struc->neg_nbr = 1;
 	nbr = ft_absval(i);
 	string = ft_add_pad(ft_itoa(nbr), fmt_struc);
-	write(1, string, ft_strlen(string));
-	return (ft_strlen(string));
+	len = ft_strlen(string);
+	write(1, string, len);
+	//free(string);
+	return (len);
 }
 
 int	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)

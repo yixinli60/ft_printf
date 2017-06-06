@@ -151,28 +151,3 @@ char	*ft_handle_pct(char *str, t_str_fmt *fmt_struc)
 	}
 	return (padded_str);
 }
-/*
-char	*ft_handle_oct(char *str, t_str_fmt *fmt_struc)
-{
-	char *string;
-	char *pad;
-	char *pad_w_0;
-	pad = NULL;
-	string = NULL;
-	if (fmt_struc->flag.hash)
-	{
-		if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - 3))))
-			return (0);
-		ft_memset(pad, '0', (fmt_struc->wid - ft_strlen(str) - 2));
-		pad_w_0 = ft_strjoin("0x", pad);
-		return (string = ft_strjoin(pad_w_0, str));
-	}
-	else
-	{
-		if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - 1))))
-			return (0);
-		ft_memset(pad, '0', (fmt_struc->wid - ft_strlen(str)));
-		return (string = ft_strcat(pad, str));
-	}
-}
-*/
