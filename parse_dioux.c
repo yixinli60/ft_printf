@@ -45,7 +45,6 @@ int	parse_other(char **fmt, t_str_fmt *fmt_struc)
 	char	*pad;
 	char	*string;
 
-	string = NULL;
 	width = fmt_struc->wid;
 	if (!(**fmt >= 65 && **fmt <= 90) || !(**fmt >= 97 && **fmt <= 122))
 	{
@@ -58,8 +57,7 @@ int	parse_other(char **fmt, t_str_fmt *fmt_struc)
 		write(1, string, ft_strlen(string));
 		if (width)
 			return (width);
-		else
-			return (1);
+		return (1);
 	}
 	else
 	{

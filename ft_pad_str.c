@@ -22,26 +22,23 @@
 
 char		*pre_str_zero(t_str_fmt *fmt_struc)
 {
-	char	*pad;
 	char	*pad_w_spad;
 
-	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid) + 1)))
-		return (0);
-	ft_memset(pad, ' ', (fmt_struc->wid));
-	pad[(fmt_struc->wid)] = '\0';
 	if (fmt_struc->flag.plus)
 	{
 		if (!(pad_w_spad = malloc(sizeof(char) * (fmt_struc->wid) + 2)))
 			return (0);
-		pad_w_spad = ft_strcat(pad, "+");
+		ft_memset(pad_w_spad, ' ', (fmt_struc->wid + 2));
+		pad_w_spad[fmt_struc->wid + 1] = '+';
+		pad_w_spad[fmt_struc->wid + 2] = '\0';
 	}
 	else
 	{
 		if (!(pad_w_spad = malloc(sizeof(char) * (fmt_struc->wid) + 1)))
 			return (0);
-		pad_w_spad = pad;
+		ft_memset(pad_w_spad, ' ', (fmt_struc->wid));
+		pad_w_spad[fmt_struc->wid + 1] = '\0';
 	}
-	free(pad);
 	return (pad_w_spad);
 }
 

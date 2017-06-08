@@ -108,7 +108,7 @@ int		parse_conv(va_list ap, char **fmt, t_str_fmt *fmt_struc)
 	}
 	else if (**fmt == 's' || **fmt == 'S')
 	{
-		if (**fmt == 'S'|| fmt_struc->length_mod == 'l')
+		if (**fmt == 'S' || fmt_struc->length_mod == 'l')
 			return (len = ft_conv_wsstr(ap));
 		return (len = ft_conv_sstr(ap, fmt_struc));
 	}

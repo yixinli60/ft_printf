@@ -12,16 +12,19 @@
 
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
-#include <locale.h>
 
 int	main(void)
 {
+printf("|%-i| |%-d| |%-i| |%-4d| |%-5d| |%3i| |%-3i| |%-4i|\n", 42, 42, -42, 42, -42, 42, 42, 42);
+ft_printf("|%-i| |%-d| |%-i| |%-4d| |%-5d| |%3i| |%-3i| |%-4i|\n", 42, 42, -42, 42, -42, 42, 42, 42);
 
-//setlocale(LC_ALL, "");
-//printf("real: |%S|\n", L"Á±≥");
-//ft_printf("mine: |%S|\n", L"Á±≥");
-printf("real: |%9C|\n", 54); //prints test
-ft_printf("mine: |%9C|\n", 54); // prints t
+
+//printf("|%#6.x|\n", 0);
+//ft_printf("|%#6.x|\n\n", 0);
+
+
+//printf("|%+4d|\n", 0); //prints test
+//ft_printf("|%+4d|\n", 0); // prints t
 /*int len = 0;
 int leng = 0;
   len = printf("|5%|\n");

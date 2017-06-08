@@ -24,14 +24,11 @@ int	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 	i = va_arg(ap, int);
 	if (i == 0)
 	{
-		if (fmt_struc->wid > 0)
+		if (fmt_struc->wid)
 		{
-			while (fmt_struc->wid != 1)
-			{
+			while (width-- != 1)
 				write(1, " ", 1);
-				fmt_struc->wid--;
-			}
-			return (width);
+			return (fmt_struc->wid);
 		}
 		else
 			write(1, "", 1);
@@ -71,11 +68,7 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 	char	*i;
 	char	*string;
 	char	*final_str;
-	int		len;
 
-	len = 0;
-	if (fmt_struc->length_mod == LENMOD_L)
-		return (len = ft_conv_wsstr(ap));
 	i = va_arg(ap, char*);
 	if (i == NULL)
 	{
@@ -95,7 +88,6 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 		string = i;
 	}
 	final_str = ft_handle_str(string, fmt_struc);
-	//free(string);
 	write(1, final_str, ft_strlen(final_str));
 	return (ft_strlen(final_str));
 }
@@ -114,8 +106,8 @@ int	ft_conv_pct(t_str_fmt *fmt_struc)
 
 int	ft_conv_wsstr(va_list ap)
 {
-	wchar_t *i;
-	wchar_t *n;
+	wchar_t	*i;
+	wchar_t	*n;
 
 	n = NULL;
 	i = va_arg(ap, wchar_t*);
@@ -133,7 +125,7 @@ int	ft_conv_wcstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	wchar_t	i;
 	char	*string;
-	char str[2];
+	char	str[2];
 
 	i = va_arg(ap, wchar_t);
 	i = (char)i;
