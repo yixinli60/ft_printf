@@ -13,7 +13,7 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-int	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
+int			ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	intmax_t	i;
 	intmax_t	nbr;
@@ -42,7 +42,7 @@ int	ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	return (ft_strlen(string));
 }
 
-int	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
+int			ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*string;
@@ -67,28 +67,14 @@ int	ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
 	return (ft_strlen(string));
 }
 
-int	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
+int			ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*string_fin;
 	char		str[100];
 	char		*string_0;
 
-	i = va_arg(ap, uintmax_t);
-	if (fmt_struc->length_mod == LENMOD_H)
-		i = (unsigned short)i;
-	else if (fmt_struc->length_mod == LENMOD_HH)
-		i = (unsigned char)i;
-	else if (fmt_struc->length_mod == LENMOD_L)
-		i = (unsigned long)i;
-	else if (fmt_struc->length_mod == LENMOD_LL)
-		i = (unsigned long long)i;
-	else if (fmt_struc->length_mod == LENMOD_J)
-		i = (uintmax_t)i;
-	else if (fmt_struc->length_mod == LENMOD_Z)
-		i = (size_t)i;
-	else
-		i = (unsigned int)i;
+	i = ft_lenmod(ap, fmt_struc);
 	ft_itoa_base(i, str, 8);
 	if (fmt_struc->flag.hash && (str[0] != '0'))
 		string_0 = ft_strjoin("0", str);
@@ -101,11 +87,24 @@ int	ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 	return (ft_strlen(string_fin));
 }
 
-int	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
+int			ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
 	char		*string_fin;
 	char		str[100];
+
+	i = ft_lenmod(ap, fmt_struc);
+	ft_itoa_base(i, str, 16);
+	string_fin = ft_handle_hex(str, fmt_struc);
+	if (fmt_struc->cap == 1)
+		ft_strtoupper(string_fin);
+	write(1, string_fin, ft_strlen(string_fin));
+	return (ft_strlen(string_fin));
+}
+
+uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc)
+{
+	uintmax_t	i;
 
 	i = va_arg(ap, uintmax_t);
 	if (fmt_struc->length_mod == LENMOD_H)
@@ -122,10 +121,5 @@ int	ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 		i = (size_t)i;
 	else
 		i = (unsigned int)i;
-	ft_itoa_base(i, str, 16);
-	string_fin = ft_handle_hex(str, fmt_struc);
-	if (fmt_struc->cap == 1)
-		ft_strtoupper(string_fin);
-	write(1, string_fin, ft_strlen(string_fin));
-	return (ft_strlen(string_fin));
+	return (i);
 }

@@ -7,7 +7,7 @@
 
 int main(void)
 {
-/*
+
   printf("%s %s %hhdh\n", "ONE", "TWO", (char)-50);
   ft_printf("%s %s %hhdh\n", "ONE", "TWO", (char)-50);
 
@@ -58,10 +58,10 @@ int main(void)
 
   printf("%-.8D\n", 888);
   ft_printf("%-.8D\n", 888);
-*/
+
   printf("%012.8D\n", 123);
   ft_printf("%012.8D\n", 123);
-/*
+
   printf("%012.1D\n", 122);
   ft_printf("%012.1D\n", 122);
 
@@ -205,6 +205,6 @@ int main(void)
   ft_printf("%lc\n", 0x01F604);
   printf("%#08x\n", 42);
   ft_printf("%#08x\n", 42);
-*/
+
 return (0);
 }
