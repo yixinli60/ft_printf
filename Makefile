@@ -25,8 +25,9 @@ FILENAMES = ft_printf.c \
 	parsing.c \
 	printing.c \
 	parse_dioux.c \
-	ft_conv_pct.c
-	
+	ft_conv_pct.c \
+	ft_handle_hex.c
+
 OBJECTS	= $(FILENAMES:.c=.o)
 
 all: $(NAME)

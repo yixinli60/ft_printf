@@ -90,5 +90,7 @@ char			*ft_hex_zero(char *str, t_str_fmt *fmt_struc);
 uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc);
 char			*ft_add_hash(char *str, t_str_fmt *fmt_struc);
 char			*ft_zero_hash(char *str, t_str_fmt *fmt_struc);
+char			*ft_x_wid_len_pre(char *str, t_str_fmt *fmt_struc);
+
 
 #endif

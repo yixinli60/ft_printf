@@ -16,11 +16,11 @@
 int	main(void)
 {
 
-printf("|%010x|\n", 1234);
-ft_printf("|%010x|\n", 1234);
+printf("|%10.9d|\n", 1234);
+ft_printf("|%10.9d|\n", 1234);
 
-printf("|%#010x|\n", 1234);
-ft_printf("|%#010x|\n", 1234);
+//printf("|%#010.9d|\n", 1234);
+//ft_printf("|%#010.9d|\n", 1234);
 
 //printf("|%1.9x|\n", 1234);
 //ft_printf("|%1.9x|\n", 1234);
