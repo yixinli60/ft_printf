@@ -47,7 +47,6 @@ char		*ft_wid_len_pre(t_str_fmt *fmt_struc, int int_len, char *str)
 	char	*str_w_0pad;
 	char	*pad;
 	char	*str_w_pad;
-	char	*string_0x;
 
 	if (fmt_struc->flag.plus || fmt_struc->flag.space || fmt_struc->neg_nbr)
 		int_len = int_len + 1;
@@ -58,14 +57,9 @@ char		*ft_wid_len_pre(t_str_fmt *fmt_struc, int int_len, char *str)
 		ft_memset(pad, '0', (fmt_struc->wid - int_len));
 		pad[(fmt_struc->wid - int_len)] = '\0';
 		str_w_pad = ft_strcat(pad, str);
-		//free(pad);
 		return (ft_add_signs(str_w_pad, fmt_struc));
 	}
-	if (fmt_struc->flag.hash && fmt_struc->hex)
-		string_0x = ft_strjoin("0x", str);
-	else
-		string_0x = str;
-	str_w_0pad = ft_add_signs(string_0x, fmt_struc);
+	str_w_0pad = ft_add_signs(str, fmt_struc);
 	if (fmt_struc->wid >= (int)ft_strlen(str_w_0pad))
 	{
 		ft_memset(pad, ' ', (fmt_struc->wid - ft_strlen(str_w_0pad)));

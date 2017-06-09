@@ -57,7 +57,6 @@ int	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 	else
 		ft_itoa_base(i, str, 16);
 	string = ft_strjoin("0x", str);
-	//free(str);
 	string_fin = ft_add_pad(string, fmt_struc);
 	write(1, string_fin, ft_strlen(string_fin));
 	return (ft_strlen(string_fin));
@@ -90,18 +89,6 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 	final_str = ft_handle_str(string, fmt_struc);
 	write(1, final_str, ft_strlen(final_str));
 	return (ft_strlen(final_str));
-}
-
-int	ft_conv_pct(t_str_fmt *fmt_struc)
-{
-	char	str[2];
-	char	*string;
-
-	str[0] = '%';
-	str[1] = '\0';
-	string = ft_handle_pct(str, fmt_struc);
-	write(1, string, ft_strlen(string));
-	return (ft_strlen(string));
 }
 
 int	ft_conv_wsstr(va_list ap)

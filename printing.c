@@ -17,8 +17,6 @@ char	*ft_add_signs(char *str, t_str_fmt *fmt_struc)
 {
 	char *string;
 
-	if (fmt_struc->flag.hash && fmt_struc->hex)
-		str[1] = 'x';
 	if (fmt_struc->conv == 'u' || fmt_struc->conv == 'U')
 		return (str);
 	if (!(string = malloc(sizeof(char) * (ft_strlen(str) + 2))))
@@ -44,28 +42,18 @@ char	*ft_add_space(char *str_w_0pad, t_str_fmt *fmt_struc)
 	int		wid;
 
 	wid = fmt_struc->wid;
-	if (fmt_struc->pre > (int)ft_strlen(str_w_0pad))
+	if (wid >= (int)ft_strlen(str_w_0pad))
 	{
-		if (!(pad = malloc(sizeof(char) * (wid - fmt_struc->pre + 1))))
+		if (!(pad = malloc(sizeof(char) * (wid - ft_strlen(str_w_0pad) + 1))))
 			return (0);
-		ft_memset(pad, ' ', (wid - fmt_struc->pre));
-		pad[(wid - fmt_struc->pre)] = '\0';
+		ft_memset(pad, ' ', (wid - ft_strlen(str_w_0pad)));
+		pad[(wid - ft_strlen(str_w_0pad))] = '\0';
 	}
 	else
 	{
-		if (wid >= (int)ft_strlen(str_w_0pad))
-		{
-			if (!(pad = malloc(sizeof(char) * (wid - ft_strlen(str_w_0pad) + 1))))
-				return (0);
-			ft_memset(pad, ' ', (wid - ft_strlen(str_w_0pad)));
-			pad[(wid - ft_strlen(str_w_0pad))] = '\0';
-		}
-		else
-		{
-			if (!(pad = malloc(sizeof(char) * 1)))
-				return (0);
-			pad[0] = '\0';
-		}
+		if (!(pad = malloc(sizeof(char) * 1)))
+			return (0);
+		pad[0] = '\0';
 	}
 	str_w_spad = ft_mflag(str_w_0pad, pad, fmt_struc);
 	free(str_w_0pad);

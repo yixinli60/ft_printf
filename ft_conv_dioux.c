@@ -47,21 +47,7 @@ int			ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
 	uintmax_t	i;
 	char		*string;
 
-	i = va_arg(ap, uintmax_t);
-	if (fmt_struc->length_mod == LENMOD_H)
-		i = (unsigned short)i;
-	else if (fmt_struc->length_mod == LENMOD_HH)
-		i = (unsigned char)i;
-	else if (fmt_struc->length_mod == LENMOD_L)
-		i = (unsigned long)i;
-	else if (fmt_struc->length_mod == LENMOD_LL)
-		i = (unsigned long long)i;
-	else if (fmt_struc->length_mod == LENMOD_J)
-		i = (uintmax_t)i;
-	else if (fmt_struc->length_mod == LENMOD_Z)
-		i = (size_t)i;
-	else
-		i = (unsigned int)i;
+	i = ft_lenmod(ap, fmt_struc);
 	string = ft_add_pad(ft_itoa(i), fmt_struc);
 	write(1, string, ft_strlen(string));
 	return (ft_strlen(string));
@@ -93,9 +79,21 @@ int			ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 	char		*string_fin;
 	char		str[100];
 
+	string_fin = NULL;
 	i = ft_lenmod(ap, fmt_struc);
 	ft_itoa_base(i, str, 16);
-	string_fin = ft_handle_hex(str, fmt_struc);
+	if (*str == '0')
+	{
+		if (fmt_struc->pre < 0 && !fmt_struc->wid)
+		{
+			write(1, "0", 1);
+			return (1);
+		}
+		else
+			string_fin = ft_hex_zero(str, fmt_struc);
+	}
+	else
+		string_fin = ft_handle_hex(str, fmt_struc);
 	if (fmt_struc->cap == 1)
 		ft_strtoupper(string_fin);
 	write(1, string_fin, ft_strlen(string_fin));

@@ -35,103 +35,85 @@ char	*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
 		ft_memset(pad, ' ', (width - ft_strlen(str_w_0pad)));
 		pad[(width - ft_strlen(str_w_0pad))] = '\0';
 		str_w_spad = ft_mflag(str_w_0pad, pad, fmt_struc);
-		//free(pad);
 		return (str_w_spad);
 	}
 	return (str_w_0pad);
 }
 
-char	*ft_hex_pre_zero(t_str_fmt *fmt_struc)
+char	*ft_hex_zero(char *str, t_str_fmt *fmt_struc)
 {
 	char	*pad;
 
-	if (!(pad = malloc(sizeof(char) * (fmt_struc->pre + 1))))
+	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid + 1))))
 		return (0);
-	ft_memset(pad, '0', fmt_struc->pre);
-	pad[fmt_struc->pre + 1] = '\0';
-	return (ft_add_space(pad, fmt_struc));
+	ft_memset(pad, ' ', fmt_struc->wid);
+	pad[(fmt_struc->wid + 1)] = '\0';
+	str = pad;
+	free(pad);
+	return (str);
 }
 
-char	*ft_hex_zero(t_str_fmt *fmt_struc)
+char	*ft_add_hash(char *str, t_str_fmt *fmt_struc)
 {
-	char	*pad;
-	char	*hmm;
+	char	*hash_pad;
 
-	if (fmt_struc->wid)
+	if (fmt_struc->flag.hash)
 	{
-		if (!(pad = malloc(sizeof(char) * fmt_struc->wid)))
-			return (0);
-		ft_memset(pad, ' ', fmt_struc->wid - 1);
-		pad[fmt_struc->wid - 1] = '0';
-		pad[fmt_struc->wid] = '\0';
+		hash_pad = ft_strjoin("0x", str);
+		return (hash_pad);
 	}
 	else
-	{
-		if (!(pad = malloc(sizeof(char) * 2)))
-			return (0);
-		pad[0] = '0';
-		pad[1] = '\0';
-	}
-	hmm = pad;
+		return (str);
+}
+
+char	*ft_zero_hash(char *str, t_str_fmt *fmt_struc)
+{
+	char	*pad;
+	char	*zero_pad;
+
+	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - ft_strlen(str) + 1))))
+		return (0);
+	ft_memset(pad, '0', (fmt_struc->wid - ft_strlen(str)));
+	pad[(fmt_struc->wid - ft_strlen(str))] = '\0';
+	zero_pad = ft_strjoin(pad, str);
 	free(pad);
-	return (hmm);
+	if (fmt_struc->flag.hash)
+		zero_pad[1] = 'x';
+	return (zero_pad);
 }
 
 char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 {
-	char	*pad;
-	char	*str_w_0pad;
-	int		str_len;
 	char	*hash_pad;
+	char	*pad;
+	int		len;
 
-	str_len = ft_strlen(str);
-	if (*str == '0')
+	len = ft_strlen(str);
+	if ((len >= fmt_struc->pre) && (len >= fmt_struc->wid))
+		return (ft_add_hash(str, fmt_struc));
+	else if ((fmt_struc->pre > len) && (fmt_struc->pre >= fmt_struc->wid))
 	{
-		if (fmt_struc->pre < 0)
-			return (ft_hex_zero(fmt_struc));
-		return (ft_hex_pre_zero(fmt_struc));
+		if (!(pad = malloc(sizeof(char) * fmt_struc->pre - len + 1)))
+			return (0);
+		ft_memset(pad, '0', (fmt_struc->pre - len));
+		pad[(fmt_struc->pre - len + 1)] = '\0';
+		hash_pad = ft_strjoin(pad, str);
+		free(pad);
+		return (ft_add_hash(hash_pad, fmt_struc));
 	}
-	if (fmt_struc->pre >= str_len && fmt_struc->pre >= fmt_struc->wid)
+	else if ((fmt_struc->wid >= len) && (len >= fmt_struc->pre))
 	{
-		pad = ft_set_pad(fmt_struc, str_len);
-		if (fmt_struc->flag.hash)
-		{
-			if (!(hash_pad = malloc(sizeof(char) * (ft_strlen(pad) + 3))))
-				return (0);
-			hash_pad = ft_strjoin("0x", pad);
-			str_w_0pad = ft_add_signs(ft_strcat(hash_pad, str), fmt_struc);
-		}
-		else
-			str_w_0pad = ft_add_signs(ft_strcat(pad, str), fmt_struc);
-		return (str_w_0pad);
-	}
-	else if (fmt_struc->wid >= str_len && str_len >= fmt_struc->pre)
-		return (ft_wid_len_pre(fmt_struc, str_len, str));
-	else if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= str_len)
-	{
-		pad = ft_set_pad(fmt_struc, str_len);
-		if (fmt_struc->flag.hash)
-		{
-			if (!(hash_pad = malloc(sizeof(char) * (ft_strlen(pad) + 3))))
-				return (0);
-			hash_pad = ft_strjoin("0x", pad);
-			str_w_0pad = ft_add_signs(ft_strcat(hash_pad, str), fmt_struc);
-		}
-		else
-			str_w_0pad = ft_add_signs(ft_strcat(pad, str), fmt_struc);
-		return (ft_add_space(str_w_0pad, fmt_struc));
+		if (fmt_struc->pre == -1 && fmt_struc->flag.zero && !fmt_struc->flag.minus)
+			return (ft_zero_hash(str, fmt_struc));
+		hash_pad = ft_add_hash(str, fmt_struc);
+		if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - ft_strlen(hash_pad) + 1))))
+			return (0);
+		ft_memset(pad, ' ', (fmt_struc->wid - ft_strlen(hash_pad)));
+		pad[(fmt_struc->wid - ft_strlen(hash_pad))] = '\0';
+		return (ft_mflag(hash_pad, pad, fmt_struc));
 	}
 	else
-	{
-		if (fmt_struc->flag.hash)
-		{
-			if (!(hash_pad = malloc(sizeof(char) * (ft_strlen(str) + 3))))
-				return (0);
-			hash_pad = ft_strjoin("0x", str);
-			return (ft_add_signs(hash_pad, fmt_struc));
-		}
-	}
-	return (ft_add_signs(str, fmt_struc));
+		return (str);
 }
 
 char	*ft_handle_pct(char *str, t_str_fmt *fmt_struc)

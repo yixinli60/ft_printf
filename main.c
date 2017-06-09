@@ -15,8 +15,25 @@
 
 int	main(void)
 {
-printf("%jx\n", 4294967296);
-ft_printf("%jx\n", 4294967296);
+
+printf("|%010x|\n", 1234);
+ft_printf("|%010x|\n", 1234);
+
+printf("|%#010x|\n", 1234);
+ft_printf("|%#010x|\n", 1234);
+
+//printf("|%1.9x|\n", 1234);
+//ft_printf("|%1.9x|\n", 1234);
+
+//printf("|%8.9x|\n", 1234);
+//ft_printf("|%8.9x|\n", 1234);
+
+//printf("|%01x|\n", 1234);
+//ft_printf("|%01.2x|\n", 1234);
+
+//ft_printf("|%#08x|\n", 1234);
+
+
 //printf("|%#6.x|\n", 0);
 //ft_printf("|%#6.x|\n\n", 0);
 
