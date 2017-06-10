@@ -21,17 +21,17 @@ void	ft_swa(char *a, char *b)
 	*b = t;
 }
 
-void	rev_str(char *str, int length)
+void	rev_str(char *str, int len)
 {
-	int	start;
+	int	begin;
 	int	end;
 
-	start = 0;
-	end = length - 1;
-	while (start < end)
+	begin = 0;
+	end = len - 1;
+	while (begin < end)
 	{
-		ft_swa(str + start, str + end);
-		start++;
+		ft_swa(str + begin, str + end);
+		begin++;
 		end--;
 	}
 }

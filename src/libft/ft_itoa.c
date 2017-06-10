@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-char		*ft_itoa(uintmax_t n)
+
+char	*ft_itoa(uintmax_t n)
 {
 	uintmax_t	tmp;
 	uintmax_t	len;
-
 	char		*str;
+
 	tmp = n;
 	len = 1;
 	while (tmp /= 10)

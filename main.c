@@ -16,9 +16,25 @@
 int	main(void)
 {
 
-printf("|%10.9d|\n", 1234);
-ft_printf("|%10.9d|\n", 1234);
+ft_printf("%15u\n", 4294967295);
+printf("%15u\n", 4294967295);
 
+/*
+printf("|% 10.1d|\n", 1234);
+ft_printf("|% 10.1d|\n", 1234);
+
+printf("|%+10.1d|\n", 1234);
+ft_printf("|%+10.1d|\n", 1234);
+
+printf("|%-10.1d|\n", 1234);
+ft_printf("|%-10.1d|\n", 1234);
+
+printf("|%010.1d|\n", 1234);
+ft_printf("|%010.1d|\n", 1234);
+
+printf("|% -10.1d|\n", 1234);
+ft_printf("|% -10.1d|\n", 1234);
+*/
 //printf("|%#010.9d|\n", 1234);
 //ft_printf("|%#010.9d|\n", 1234);
 
