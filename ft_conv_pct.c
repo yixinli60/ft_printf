@@ -15,12 +15,27 @@
 
 int	ft_conv_pct(t_str_fmt *fmt_struc)
 {
-	char	str[2];
+	int		len;
+	char	*pad;
 	char	*string;
+	char	*pct;
 
-	str[0] = '%';
-	str[1] = '\0';
-	string = ft_handle_pct(str, fmt_struc);
-	write(1, string, ft_strlen(string));
-	return (ft_strlen(string));
+	pct = "%";
+	len = fmt_struc->wid;
+	if (len)
+	{
+		if (!(pad = malloc(sizeof(char) * len)))
+			return (0);
+		ft_memset(pad, ' ', fmt_struc->wid - 1);
+		pad[fmt_struc->wid] = '\0';
+		string = ft_mflag(pct, pad, fmt_struc);
+		free(pad);
+		write(1, string, ft_strlen(string));
+		return (fmt_struc->wid);
+	}
+	else
+	{
+		write(1, "%", 1);
+		return (1);
+	}
 }

@@ -81,7 +81,6 @@ int				ft_conv_pct(t_str_fmt *fmt_struc);
 
 char			*ft_handle_str(char *str, t_str_fmt *fmt_struc);
 char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
-char			*ft_handle_pct(char *str, t_str_fmt *fmt_struc);
 
 int				parse_other(char **fmt, t_str_fmt *fmt_struc);
 char			*ft_handle_oct(char *str, t_str_fmt *fmt_struc);
@@ -90,6 +89,7 @@ int				ft_conv_wsstr(va_list ap);
 int				ft_conv_wcstr(va_list ap, t_str_fmt *fmt_struc);
 
 uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc);
+intmax_t	ft_lendmod(va_list ap, t_str_fmt *fmt_struc);
 
 char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
 char			*ft_hex_zero(char *str, t_str_fmt *fmt_struc);

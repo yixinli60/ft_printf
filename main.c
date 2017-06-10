@@ -15,9 +15,8 @@
 
 int	main(void)
 {
-
-ft_printf("%15u\n", 4294967295);
-printf("%15u\n", 4294967295);
+printf("%d", 42);
+ft_printf("%d", 42);
 
 /*
 printf("|% 10.1d|\n", 1234);

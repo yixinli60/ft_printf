@@ -19,8 +19,6 @@ char	*ft_add_signs(char *str, t_str_fmt *fmt_struc)
 
 	if (fmt_struc->conv == 'u' || fmt_struc->conv == 'U')
 		return (str);
-	if (!(string = malloc(sizeof(char) * (ft_strlen(str) + 2))))
-		return (0);
 	if (fmt_struc->neg_nbr)
 		string = ft_strjoin("-", str);
 	else if (fmt_struc->flag.plus)

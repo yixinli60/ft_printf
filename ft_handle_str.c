@@ -13,7 +13,7 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-char	*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
+char		*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
 {
 	char	*pad;
 	char	*str_w_spad;
@@ -40,24 +40,46 @@ char	*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
 	return (str_w_0pad);
 }
 
-char	*ft_handle_pct(char *str, t_str_fmt *fmt_struc)
+uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc)
 {
-	char *space_pad;
-	char *padded_str;
+	uintmax_t	i;
 
-	if (fmt_struc->wid)
-	{
-		if (!(space_pad = malloc(sizeof(char) * (fmt_struc->wid))))
-			return (0);
-		ft_memset(space_pad, ' ', fmt_struc->wid - 1);
-		padded_str = ft_mflag(str, space_pad, fmt_struc);
-	}
+	i = va_arg(ap, uintmax_t);
+	if (fmt_struc->length_mod == LENMOD_H)
+		i = (unsigned short)i;
+	else if (fmt_struc->length_mod == LENMOD_HH)
+		i = (unsigned char)i;
+	else if (fmt_struc->length_mod == LENMOD_L)
+		i = (unsigned long)i;
+	else if (fmt_struc->length_mod == LENMOD_LL)
+		i = (unsigned long long)i;
+	else if (fmt_struc->length_mod == LENMOD_J)
+		i = (uintmax_t)i;
+	else if (fmt_struc->length_mod == LENMOD_Z)
+		i = (size_t)i;
 	else
-	{
-		if (!(padded_str = malloc(sizeof(char) * 2)))
-			return (0);
-		padded_str[0] = '%';
-		padded_str[1] = '\0';
-	}
-	return (padded_str);
+		i = (unsigned int)i;
+	return (i);
+}
+
+intmax_t	ft_lendmod(va_list ap, t_str_fmt *fmt_struc)
+{
+	intmax_t	i;
+
+	i = va_arg(ap, intmax_t);
+	if (fmt_struc->length_mod == LENMOD_H)
+		i = (short)i;
+	else if (fmt_struc->length_mod == LENMOD_HH)
+		i = (char)i;
+	else if (fmt_struc->length_mod == LENMOD_L)
+		i = (long)i;
+	else if (fmt_struc->length_mod == LENMOD_LL)
+		i = (intmax_t)i;
+	else if (fmt_struc->length_mod == LENMOD_J)
+		i = (intmax_t)i;
+	else if (fmt_struc->length_mod == LENMOD_Z)
+		i = (size_t)i;
+	else
+		i = (int)i;
+	return (i);
 }
