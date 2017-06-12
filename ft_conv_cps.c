@@ -65,13 +65,14 @@ int	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	char	*i;
-	char	*final_str;
-
+//	char	*final_str;
+fmt_struc->pre = 1;
 	i = va_arg(ap, char*);
 	if (i == NULL)
 		return (write(1, "(null)", 6));
-	final_str = ft_handle_str(i, fmt_struc);
-	return (write(1, final_str, ft_strlen(final_str)));
+	return(write(1, i, ft_strlen(i)));
+//	final_str = ft_handle_str(i, fmt_struc);
+//	return (write(1, final_str, ft_strlen(final_str)));
 }
 
 int	ft_conv_wsstr(va_list ap)

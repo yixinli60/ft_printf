@@ -21,7 +21,6 @@ int	main(void)
 //len = printf("|%15.1s|\n", "HELEOIJ");
 //leng = ft_printf("|%15.1s|\n", "HELEOIJ");
 
-
 printf("STRING TEST\n");
 printf("______________\n\n");
 
