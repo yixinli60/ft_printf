@@ -25,8 +25,7 @@ int	main(void)
 //ft_printf("|%15.14s|\n", "HELEOIJ");
 
 
-
-printf("STRING TEST\n");
+/*printf("STRING TEST\n");
 printf("______________\n\n");
 printf("|%s|\n", "HELEOIJ");
 ft_printf("|%s|\n\n", "HELEOIJ");
@@ -58,7 +57,7 @@ ft_printf("|%-15.10s|\n\n", "HELEOIJ");
 
 printf("|%-10s| is a string\n", "this");
 ft_printf("|%-10s| is a string\n\n", "this");
-
+*/
 //printf("len is %d, leng is %d\n", len, leng);
 
 //printf("|% 10.1d|\n", 1234);
