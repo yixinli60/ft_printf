@@ -24,7 +24,8 @@ char		*ft_handle_str(char *str, t_str_fmt *fmt_struc)
 			&& fmt_struc->pre != -1)
 		return (str_wid(str, fmt_struc));
 	else if ((fmt_struc->pre == -1 && fmt_struc->wid) == 0 ||
-		(fmt_struc->pre >= (int)ft_strlen(str) && (int)ft_strlen(str) >= wid))
+		(fmt_struc->pre >= (int)ft_strlen(str) && (int)ft_strlen(str) >= wid)
+	 || (fmt_struc->pre == -1 && (int)ft_strlen(str) >= wid))
 	{
 		if (!(pad = malloc(sizeof(char) * (ft_strlen(str) + 1))))
 			return (0);
