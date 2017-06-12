@@ -21,14 +21,21 @@ int	main(void)
 //len = printf("|%15.1s|\n", "HELEOIJ");
 //leng = ft_printf("|%15.1s|\n", "HELEOIJ");
 
-printf("|%1s|\n", "HELEOIJ");
-ft_printf("|%1s|\n", "HELEOIJ");
 
-
-/*printf("STRING TEST\n");
+printf("STRING TEST\n");
 printf("______________\n\n");
+
+printf("wid not set, pre not set:\n");
 printf("|%s|\n", "HELEOIJ");
 ft_printf("|%s|\n\n", "HELEOIJ");
+
+printf("len, wid, pre not set:\n");
+printf("|%1s|\n", "HELEOIJ");
+ft_printf("|%1s|\n\n", "HELEOIJ");
+
+printf("wid, len, pre not set:\n");
+printf("|%-15s|\n", "HELEOIJ");
+ft_printf("|%-15s|\n\n", "HELEOIJ");
 
 printf("len, pre, wid:\n");
 printf("|%10s|\n", "HELEOIJ");
@@ -55,9 +62,6 @@ printf("|%-15.10s|\n", "HELEOIJ");
 ft_printf("|%-15.10s|\n\n", "HELEOIJ");
 
 
-printf("|%-10s| is a string\n", "this");
-ft_printf("|%-10s| is a string\n\n", "this");
-*/
 //printf("len is %d, leng is %d\n", len, leng);
 
 //printf("|% 10.1d|\n", 1234);
