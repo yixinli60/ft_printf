@@ -68,11 +68,6 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 	char	*final_str;
 
 	i = va_arg(ap, char*);
-	if(strcmp(i, "pouet"))
-	{
-		printf("pouet");
-		return (0);
-	}
 	if (i == NULL)
 		return (write(1, "(null)", 6));
 	else if (fmt_struc->pre == 0)
