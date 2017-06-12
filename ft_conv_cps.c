@@ -70,11 +70,6 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 	i = va_arg(ap, char*);
 	if (i == NULL)
 		return (write(1, "(null)", 6));
-	else if (fmt_struc->pre == 0)
-	{
-		write(1, "", 1);
-		return (0);
-	}
 	final_str = ft_handle_str(i, fmt_struc);
 	return (write(1, final_str, ft_strlen(final_str)));
 }

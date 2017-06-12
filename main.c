@@ -21,8 +21,8 @@ int	main(void)
 //len = printf("|%15.1s|\n", "HELEOIJ");
 //leng = ft_printf("|%15.1s|\n", "HELEOIJ");
 
-//printf("|%15.14s|\n", "HELEOIJ");
-//ft_printf("|%15.14s|\n", "HELEOIJ");
+printf("|%15.0s|\n", "HELEOIJ");
+ft_printf("|%15.0s|\n", "HELEOIJ");
 
 
 /*printf("STRING TEST\n");
