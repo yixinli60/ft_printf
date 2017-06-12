@@ -65,30 +65,18 @@ int	ft_conv_p(va_list ap, t_str_fmt *fmt_struc)
 int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	char	*i;
-	char	*string;
 	char	*final_str;
 
 	i = va_arg(ap, char*);
 	if (i == NULL)
+		return (write(1, "(null)", 6));
+	else if (fmt_struc->pre == 0)
 	{
-		write(1, "(null)", 6);
-		return (6);
+		write(1, "", 1);
+		return (0);
 	}
-	if ((int)ft_strlen(i) > fmt_struc->pre && fmt_struc->pre > 0)
-	{
-		if (!(string = malloc(sizeof(char) * (fmt_struc->pre))))
-			return (0);
-		ft_strncpy(string, i, fmt_struc->pre);
-	}
-	else
-	{
-		if (!(string = malloc(sizeof(char) * (ft_strlen(i) + 1))))
-			return (0);
-		string = i;
-	}
-	final_str = ft_handle_str(string, fmt_struc);
-	write(1, final_str, ft_strlen(final_str));
-	return (ft_strlen(final_str));
+	final_str = ft_handle_str(i, fmt_struc);
+	return (write(1, final_str, ft_strlen(final_str)));
 }
 
 int	ft_conv_wsstr(va_list ap)

@@ -15,13 +15,55 @@
 
 int	main(void)
 {
-printf("%d", 42);
-ft_printf("%d", 42);
+  //int len = 0;
+  //int leng = 0;
 
+//len = printf("|%15.1s|\n", "HELEOIJ");
+//leng = ft_printf("|%15.1s|\n", "HELEOIJ");
+
+//printf("|%15.14s|\n", "HELEOIJ");
+//ft_printf("|%15.14s|\n", "HELEOIJ");
+
+
+
+printf("STRING TEST\n");
+printf("______________\n\n");
+printf("|%s|\n", "HELEOIJ");
+ft_printf("|%s|\n\n", "HELEOIJ");
+
+printf("len, pre, wid:\n");
+printf("|%10s|\n", "HELEOIJ");
+ft_printf("|%10s|\n\n", "HELEOIJ");
+
+printf("pre, len, wid:\n");
+printf("|%1.15s|\n", "HELEOIJ");
+ft_printf("|%1.15s|\n\n", "HELEOIJ");
+
+printf("wid, len, pre:\n");
+printf("|%-10.1s|\n", "HELEOIJ");
+ft_printf("|%-10.1s|\n\n", "HELEOIJ");
+
+printf("len, wid, pre:\n");
+printf("|%-4.1s|\n", "HELEOIJ");
+ft_printf("|%-4.1s|\n\n", "HELEOIJ");
+
+printf("pre, wid, len:\n");
+printf("|%-10.15s|\n", "HELEOIJ");
+ft_printf("|%-10.15s|\n\n", "HELEOIJ");
+
+printf("wid, pre, len:\n");
+printf("|%-15.10s|\n", "HELEOIJ");
+ft_printf("|%-15.10s|\n\n", "HELEOIJ");
+
+
+printf("|%-10s| is a string\n", "this");
+ft_printf("|%-10s| is a string\n\n", "this");
+
+//printf("len is %d, leng is %d\n", len, leng);
+
+//printf("|% 10.1d|\n", 1234);
+//ft_printf("|% 10.1d|\n", 1234);
 /*
-printf("|% 10.1d|\n", 1234);
-ft_printf("|% 10.1d|\n", 1234);
-
 printf("|%+10.1d|\n", 1234);
 ft_printf("|%+10.1d|\n", 1234);
 

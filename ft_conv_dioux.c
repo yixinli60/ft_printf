@@ -32,17 +32,6 @@ int			ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	return (len);
 }
 
-int			ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
-{
-	uintmax_t	i;
-	char		*string;
-
-	i = ft_lenmod(ap, fmt_struc);
-	string = ft_add_pad(ft_itoa(i), fmt_struc);
-	write(1, string, ft_strlen(string));
-	return (ft_strlen(string));
-}
-
 int			ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 {
 	uintmax_t	i;
@@ -61,6 +50,17 @@ int			ft_conv_ostr(va_list ap, t_str_fmt *fmt_struc)
 	string_fin = ft_add_pad(string_0, fmt_struc);
 	write(1, string_fin, ft_strlen(string_fin));
 	return (ft_strlen(string_fin));
+}
+
+int			ft_conv_ustr(va_list ap, t_str_fmt *fmt_struc)
+{
+	uintmax_t	i;
+	char		*string;
+
+	i = ft_lenmod(ap, fmt_struc);
+	string = ft_add_pad(ft_itoa(i), fmt_struc);
+	write(1, string, ft_strlen(string));
+	return (ft_strlen(string));
 }
 
 int			ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)

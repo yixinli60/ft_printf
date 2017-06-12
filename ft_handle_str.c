@@ -13,31 +13,75 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-char		*ft_handle_str(char *str_w_0pad, t_str_fmt *fmt_struc)
+char		*ft_handle_str(char *str, t_str_fmt *fmt_struc)
 {
 	char	*pad;
 	char	*str_w_spad;
-	int		width;
+	int		wid;
 
-	width = fmt_struc->wid;
-	if (fmt_struc->pre == 0)
+	wid = fmt_struc->wid;
+	if (wid >= fmt_struc->pre && (int)ft_strlen(str) >= fmt_struc->pre
+			&& fmt_struc->pre != -1)
+		return (str_wid(str, fmt_struc));
+	else if ((fmt_struc->pre == -1 && !fmt_struc->wid) ||
+		(fmt_struc->pre >= (int)ft_strlen(str) && (int)ft_strlen(str) >= wid))
 	{
-		if (!(pad = malloc(sizeof(char) * (width + 1))))
+		if (!(pad = malloc(sizeof(char) * (ft_strlen(str) + 1))))
 			return (0);
-		ft_memset(pad, ' ', (width));
-		pad[(width + 1)] = '\0';
-		return (pad);
-	}
-	if (width > (int)ft_strlen(str_w_0pad))
-	{
-		if (!(pad = malloc(sizeof(char) * (width - ft_strlen(str_w_0pad) + 1))))
-			return (0);
-		ft_memset(pad, ' ', (width - ft_strlen(str_w_0pad)));
-		pad[(width - ft_strlen(str_w_0pad))] = '\0';
-		str_w_spad = ft_mflag(str_w_0pad, pad, fmt_struc);
+		ft_strncpy(pad, str, ft_strlen(str));
+		str_w_spad = pad;
+		free(pad);
 		return (str_w_spad);
 	}
-	return (str_w_0pad);
+	else
+		return (str_len(str, fmt_struc));
+}
+
+char		*str_wid(char *str, t_str_fmt *fmt_struc)
+{
+	int		wid;
+	char	*pad;
+	char	*str_w_spad;
+	char	*string;
+
+	wid = fmt_struc->wid;
+	if (!(pad = malloc(sizeof(char) * (wid - fmt_struc->pre + 1))))
+		return (0);
+	ft_memset(pad, ' ', (wid - fmt_struc->pre));
+	pad[wid - fmt_struc->pre] = '\0';
+	if (!(string = malloc(sizeof(char) * fmt_struc->pre)))
+		return (0);
+	ft_strncpy(string, str, fmt_struc->pre);
+	str_w_spad = ft_mflag(string, pad, fmt_struc);
+	free(string);
+	free(pad);
+	return (str_w_spad);
+}
+
+char		*str_len(char *str, t_str_fmt *fmt_struc)
+{
+	int		wid;
+	char	*pad;
+	char	*str_w_spad;
+
+	wid = fmt_struc->wid;
+	if ((int)ft_strlen(str) > fmt_struc->pre && fmt_struc->pre > wid)
+	{
+		if (!(pad = malloc(sizeof(char) * (fmt_struc->pre))))
+			return (0);
+		ft_strncpy(pad, str, fmt_struc->pre);
+		str_w_spad = pad;
+	}
+	else
+	{
+		if (!(pad = malloc(sizeof(char) * (wid - ft_strlen(str) + 1))))
+			return (0);
+		ft_memset(pad, ' ', (wid - ft_strlen(str)));
+		pad[(wid - ft_strlen(str))] = '\0';
+		str_w_spad = ft_mflag(str, pad, fmt_struc);
+	}
+	free(pad);
+	return (str_w_spad);
 }
 
 uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc)

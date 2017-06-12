@@ -97,5 +97,8 @@ char			*ft_add_hash(char *str, t_str_fmt *fmt_struc);
 char			*ft_zero_hash(char *str, t_str_fmt *fmt_struc);
 char			*ft_x_wid_len_pre(char *str, t_str_fmt *fmt_struc);
 
+char			*str_wid(char *str, t_str_fmt *fmt_struc);
+char			*str_len(char *str, t_str_fmt *fmt_struc);
+
 
 #endif
