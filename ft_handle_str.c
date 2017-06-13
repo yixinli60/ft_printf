@@ -20,7 +20,17 @@ char		*ft_handle_str(char *str, t_str_fmt *fmt_struc)
 	int		wid;
 
 	wid = fmt_struc->wid;
-	if (wid >= fmt_struc->pre && (int)ft_strlen(str) >= fmt_struc->pre
+	if (wid == 0 && fmt_struc->pre == -1)
+	{
+		if (!(pad = malloc(sizeof(char) * (ft_strlen(str) + 1))))
+			return (0);
+		pad[ft_strlen(str)] = '\0';
+		ft_strncpy(pad, str, ft_strlen(str));
+		str_w_spad = pad;
+		free(pad);
+		return (str_w_spad);
+	}
+	else if (wid >= fmt_struc->pre && (int)ft_strlen(str) >= fmt_struc->pre
 			&& fmt_struc->pre != -1)
 		return (str_wid(str, fmt_struc));
 	else if (((fmt_struc->pre == -1) && (fmt_struc->wid == 0)) ||

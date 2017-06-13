@@ -83,7 +83,10 @@ int	main(void)
 //printf("|%-5.3s|\n", "LYDI");
 //ft_printf("|%-5.3s|\n", "LYDI");
 
-
+printf("wid not set, pre not set:\n");
+printf("|%s|\n", "HELEOIJ");
+ft_printf("|%s|\n\n", "HELEOIJ");
+/*
 printf("STRING TEST\n");
 printf("______________\n\n");
 
@@ -135,7 +138,7 @@ ft_printf("|%-15.10s|\n\n", "HELEOIJ");
 
 printf("______________\n\n");
 
-/*
+
 printf("len is %d, leng is %d\n", len, leng);
 
 printf("|% 10.1d|\n", 1234);
