@@ -26,12 +26,12 @@ int	ft_conv_pct(t_str_fmt *fmt_struc)
 	{
 		if (!(pad = malloc(sizeof(char) * len)))
 			return (0);
-		ft_memset(pad, ' ', fmt_struc->wid - 1);
-		pad[fmt_struc->wid] = '\0';
+		ft_memset(pad, ' ', len - 1);
+		pad[len] = '\0';
 		string = ft_mflag(pct, pad, fmt_struc);
-		free(pad);
 		write(1, string, ft_strlen(string));
-		return (fmt_struc->wid);
+		free(pad);
+		return (len);
 	}
 	else
 	{

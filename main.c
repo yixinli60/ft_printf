@@ -18,8 +18,69 @@ int	main(void)
   //int len = 0;
   //int leng = 0;
 
-printf("|%s|\n", "HELEOIJ");
-ft_printf("|%s|\n", "HELEOIJ");
+
+  printf("HEX TEST\n");
+  printf("______________\n\n");
+/*
+  printf("wid not set, pre not set:\n");
+  printf("|%x|\n", 0);
+  ft_printf("|%x|\n", 0);
+
+  printf("len, pre, wid:\n");
+  printf("|%#0x|\n", 0);
+  ft_printf("|%#0x|\n", 0);
+
+  printf("len, wid, pre:\n");
+  printf("|%#2.1x|\n", 0);
+  ft_printf("|%#2.1x|\n", 0);
+
+  printf("wid, pre, len:\n");
+  printf("|%#10.8x|\n", 0);
+  ft_printf("|%#10.8x|\n", 0);
+
+  printf("wid, len, pre:\n");
+  printf("|%#10.1x|\n", 0);
+  ft_printf("|%#10.1x|\n\n", 0);
+
+  printf("pre, len, wid:\n");
+  printf("|%#0.10x|\n", 0);
+  ft_printf("|%#0.10x|\n\n", 0);
+
+
+  printf("pre, wid, len:\n");
+  printf("|%#9.10x|\n", 0);
+  ft_printf("|%#9.10x|\n\n", 0);
+
+  printf("HEX TEST nbr is 1234\n");
+  printf("|%x|\n", 1234);
+  ft_printf("|%x|\n", 1234);
+
+  printf("len, pre, wid:\n");
+  printf("|%#1.2x|\n", 1234);
+  ft_printf("|%#1.2x|\n", 1234);
+
+  printf("len, wid, pre:\n");
+  printf("|%#2.1x|\n", 1234);
+  ft_printf("|%#2.1x|\n", 1234);
+
+  printf("wid, pre, len:\n");
+  printf("|%#10.8x|\n", 1234);
+  ft_printf("|%#10.8x|\n", 1234);
+
+  printf("wid, len, pre:\n");
+  printf("|%#10.1x|\n", 1234);
+  ft_printf("|%#10.1x|\n", 1234);
+*/
+  printf("pre, wid, len:\n");
+  printf("|%#8.10x|\n", 1234);
+  ft_printf("|%#8.10x|\n", 1234);
+
+  printf("pre, len, wid:\n");
+  printf("|%#1.10x|\n", 1234);
+  ft_printf("|%#1.10x|\n", 1234);
+  printf("______________\n\n");
+
+
 /*
 printf("STRING TEST\n");
 printf("______________\n\n");
@@ -48,6 +109,7 @@ printf("wid, len, pre:\n");
 printf("|%-10.1s|\n", "HELEOIJ");
 ft_printf("|%-10.1s|\n\n", "HELEOIJ");
 
+
 printf("len, wid, pre:\n");
 printf("|%-4.1s|\n", "HELEOIJ");
 ft_printf("|%-4.1s|\n\n", "HELEOIJ");
@@ -56,9 +118,13 @@ printf("pre, wid, len:\n");
 printf("|%-10.15s|\n", "HELEOIJ");
 ft_printf("|%-10.15s|\n\n", "HELEOIJ");
 
+
 printf("wid, pre, len:\n");
 printf("|%-15.10s|\n", "HELEOIJ");
 ft_printf("|%-15.10s|\n\n", "HELEOIJ");
+
+printf("______________\n\n");
+
 
 printf("len is %d, leng is %d\n", len, leng);
 
@@ -80,20 +146,6 @@ ft_printf("|% -10.1d|\n", 1234);
 //printf("|%#010.9d|\n", 1234);
 //ft_printf("|%#010.9d|\n", 1234);
 
-//printf("|%1.9x|\n", 1234);
-//ft_printf("|%1.9x|\n", 1234);
-
-//printf("|%8.9x|\n", 1234);
-//ft_printf("|%8.9x|\n", 1234);
-
-//printf("|%01x|\n", 1234);
-//ft_printf("|%01.2x|\n", 1234);
-
-//ft_printf("|%#08x|\n", 1234);
-
-
-//printf("|%#6.x|\n", 0);
-//ft_printf("|%#6.x|\n\n", 0);
 
 
 //printf("|%+4d|\n", 0); //prints test

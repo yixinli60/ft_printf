@@ -59,7 +59,7 @@ char	*ft_add_space(char *str_w_0pad, t_str_fmt *fmt_struc)
 
 char	*ft_mflag(char *str, char *pad, t_str_fmt *fmt_struc)
 {
-	char *string;
+	char	*string;
 
 	if (fmt_struc->flag.minus)
 		string = ft_strjoin(str, pad);

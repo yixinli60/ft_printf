@@ -74,13 +74,13 @@ int			ft_conv_xstr(va_list ap, t_str_fmt *fmt_struc)
 	ft_itoa_base(i, str, 16);
 	if (*str == '0')
 	{
-		if (fmt_struc->pre < 0 && !fmt_struc->wid)
+		if (fmt_struc->pre == -1 && fmt_struc->wid == 0)
 		{
 			write(1, "0", 1);
 			return (1);
 		}
 		else
-			string_fin = ft_hex_zero(str, fmt_struc);
+			string_fin = ft_handle_str(str, fmt_struc);
 	}
 	else
 		string_fin = ft_handle_hex(str, fmt_struc);

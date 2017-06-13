@@ -60,11 +60,7 @@ char			*ft_mflag(char *str, char *pad, t_str_fmt *fmt_struc);
 
 char			*pre_str_zero(t_str_fmt *fmt_struc);
 
-
-
 char			*ft_wid_len_pre(char *str, t_str_fmt *fmt_struc);
-//char			*ft_wid_len_pre(char *str, int int_len, t_str_fmt *fmt_struc);
-
 
 char			*ft_set_pad(t_str_fmt *fmt_struc, int len);
 char			*ft_add_pad(char *string, t_str_fmt *fmt_struc);
@@ -92,7 +88,7 @@ uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc);
 intmax_t	ft_lendmod(va_list ap, t_str_fmt *fmt_struc);
 
 char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
-char			*ft_hex_zero(char *str, t_str_fmt *fmt_struc);
+//char			*ft_hex_zero(char *str, t_str_fmt *fmt_struc);
 char			*ft_add_hash(char *str, t_str_fmt *fmt_struc);
 char			*ft_zero_hash(char *str, t_str_fmt *fmt_struc);
 char			*ft_x_wid_len_pre(char *str, t_str_fmt *fmt_struc);

@@ -13,36 +13,52 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-char	*ft_hex_zero(char *str, t_str_fmt *fmt_struc)
+/*char	*ft_hex_zero(char *str, t_str_fmt *fmt_struc)
 {
 	char	*pad;
 
-	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid + 1))))
-		return (0);
-	ft_memset(pad, ' ', fmt_struc->wid);
-	pad[(fmt_struc->wid + 1)] = '\0';
-	str = pad;
-	free(pad);
+	if (fmt_struc->pre >= fmt_struc->wid && fmt_struc->pre >= (int)ft_strlen(str))
+	{
+		if (!(pad = malloc(sizeof(char) * (fmt_struc->pre + 1))))
+			return (0);
+		ft_memset(pad, '0', fmt_struc->pre);
+		pad[(fmt_struc->pre + 1)] = '\0';
+		str = pad;
+		free(pad);
+		return (str);
+	}
+	if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= (int)ft_strlen(str))
+	{
+		if (!(pad = malloc(sizeof(char) * (fmt_struc->wid + 1))))
+			return (0);
+		ft_memset(pad, ' ', fmt_struc->wid);
+		pad[(fmt_struc->wid + 1)] = '\0';
+		str = pad;
+		free(pad);
+	}
 	return (str);
 }
-
+*/
 char	*ft_add_hash(char *str, t_str_fmt *fmt_struc)
 {
 	char	*hash_pad;
+	char	*final_str;
 
 	if (fmt_struc->flag.hash)
 	{
 		hash_pad = ft_strjoin("0x", str);
-		return (hash_pad);
+		final_str = hash_pad;
+		//free(hash_pad);
+		return (final_str);
 	}
-	else
-		return (str);
+	return (str);
 }
 
 char	*ft_zero_hash(char *str, t_str_fmt *fmt_struc)
 {
 	char	*pad;
 	char	*zero_pad;
+	char	*final;
 
 	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - ft_strlen(str) + 1))))
 		return (0);
@@ -52,7 +68,9 @@ char	*ft_zero_hash(char *str, t_str_fmt *fmt_struc)
 	free(pad);
 	if (fmt_struc->flag.hash)
 		zero_pad[1] = 'x';
-	return (zero_pad);
+	final = zero_pad;
+	free(zero_pad);
+	return (final);
 }
 
 char	*ft_x_wid_len_pre(char *str, t_str_fmt *fmt_struc)
@@ -77,6 +95,7 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 	char	*hash_pad;
 	char	*pad;
 	int		len;
+	char	*final_str;
 
 	len = ft_strlen(str);
 	if ((len >= fmt_struc->pre) && (len >= fmt_struc->wid))
@@ -86,10 +105,12 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 		if (!(pad = malloc(sizeof(char) * fmt_struc->pre - len + 1)))
 			return (0);
 		ft_memset(pad, '0', (fmt_struc->pre - len));
-		pad[(fmt_struc->pre - len + 1)] = '\0';
+		pad[(fmt_struc->pre - len)] = '\0';
 		hash_pad = ft_strjoin(pad, str);
+		final_str = hash_pad;
+		//free(hash_pad);
 		free(pad);
-		return (ft_add_hash(hash_pad, fmt_struc));
+		return (ft_add_hash(final_str, fmt_struc));
 	}
 	else if ((fmt_struc->wid >= len) && (len >= fmt_struc->pre))
 		return (ft_x_wid_len_pre(str, fmt_struc));
