@@ -24,8 +24,7 @@ char		*ft_handle_str(char *str, t_str_fmt *fmt_struc)
 	{
 		if (!(pad = malloc(sizeof(char) * (ft_strlen(str) + 1))))
 			return (0);
-		pad[ft_strlen(str)] = '\0';
-		ft_strncpy(pad, str, ft_strlen(str));
+		ft_strcpy(pad, str);
 		str_w_spad = pad;
 		free(pad);
 		return (str_w_spad);
