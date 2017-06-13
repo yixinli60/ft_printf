@@ -58,7 +58,7 @@ char		*str_wid(char *str, t_str_fmt *fmt_struc)
 	final_str = str_w_spad;
 	free(string);
 	free(pad);
-	free(str_w_spad);
+	//free(str_w_spad);
 	return (final_str);
 }
 
