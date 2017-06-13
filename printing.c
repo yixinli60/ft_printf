@@ -54,14 +54,16 @@ char	*ft_add_space(char *str_w_0pad, t_str_fmt *fmt_struc)
 		pad[0] = '\0';
 	}
 	str_w_spad = ft_mflag(str_w_0pad, pad, fmt_struc);
-	free(str_w_0pad);
-	free(pad);
 	return (str_w_spad);
 }
 
 char	*ft_mflag(char *str, char *pad, t_str_fmt *fmt_struc)
 {
+	char *string;
+
 	if (fmt_struc->flag.minus)
-		return (ft_strjoin(str, pad));
-	return (ft_strcat(pad, str));
+		string = ft_strjoin(str, pad);
+	else
+		string = ft_strjoin(pad, str);
+	return (string);
 }

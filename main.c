@@ -18,9 +18,9 @@ int	main(void)
   //int len = 0;
   //int leng = 0;
 
-//len = printf("|%15.1s|\n", "HELEOIJ");
-//leng = ft_printf("|%15.1s|\n", "HELEOIJ");
-
+printf("|%s|\n", "HELEOIJ");
+ft_printf("|%s|\n", "HELEOIJ");
+/*
 printf("STRING TEST\n");
 printf("______________\n\n");
 
@@ -60,12 +60,11 @@ printf("wid, pre, len:\n");
 printf("|%-15.10s|\n", "HELEOIJ");
 ft_printf("|%-15.10s|\n\n", "HELEOIJ");
 
+printf("len is %d, leng is %d\n", len, leng);
 
-//printf("len is %d, leng is %d\n", len, leng);
+printf("|% 10.1d|\n", 1234);
+ft_printf("|% 10.1d|\n", 1234);
 
-//printf("|% 10.1d|\n", 1234);
-//ft_printf("|% 10.1d|\n", 1234);
-/*
 printf("|%+10.1d|\n", 1234);
 ft_printf("|%+10.1d|\n", 1234);
 
