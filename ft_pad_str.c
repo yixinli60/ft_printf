@@ -42,7 +42,7 @@ char		*pre_str_zero(t_str_fmt *fmt_struc)
 	return (pad_w_spad);
 }
 
-char		*ft_wid_len_pre(char *str, t_str_fmt *fmt_struc)
+char		*wid_len_pre(char *str, t_str_fmt *fmt_struc)
 {
 	int		len;
 	char	*pad;
@@ -94,7 +94,7 @@ char		*ft_add_pad(char *str, t_str_fmt *fmt_struc)
 		return (str_w_0pad);
 	}
 	else if (fmt_struc->wid >= len && len >= fmt_struc->pre)
-		return (ft_wid_len_pre(str, fmt_struc));
+		return (wid_len_pre(str, fmt_struc));
 	else if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= len)
 	{
 		pad = ft_set_pad(fmt_struc, len);

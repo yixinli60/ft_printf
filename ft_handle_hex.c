@@ -73,7 +73,7 @@ char	*ft_zero_hash(char *str, t_str_fmt *fmt_struc)
 	return (final);
 }
 
-char	*ft_x_wid_len_pre(char *str, t_str_fmt *fmt_struc)
+char	*x_wid_len_pre(char *str, t_str_fmt *fmt_struc)
 {
 	char	*pad;
 	char	*hash_pad;
@@ -113,7 +113,7 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 		return (ft_add_hash(final_str, fmt_struc));
 	}
 	else if ((fmt_struc->wid >= len) && (len >= fmt_struc->pre))
-		return (ft_x_wid_len_pre(str, fmt_struc));
+		return (x_wid_len_pre(str, fmt_struc));
 	else
 		return (str);
 }

@@ -18,10 +18,10 @@ int	main(void)
   //int len = 0;
   //int leng = 0;
 
-
+  /*
   printf("HEX TEST\n");
   printf("______________\n\n");
-/*
+
   printf("wid not set, pre not set:\n");
   printf("|%x|\n", 0);
   ft_printf("|%x|\n", 0);
@@ -71,17 +71,19 @@ int	main(void)
   printf("|%#10.1x|\n", 1234);
   ft_printf("|%#10.1x|\n", 1234);
 */
-  printf("pre, wid, len:\n");
-  printf("|%#8.10x|\n", 1234);
-  ft_printf("|%#8.10x|\n", 1234);
+  //printf("pre, wid, len:\n");
+  //printf("|%#8.10x|\n", 1234);
+  //ft_printf("|%#8.10x|\n", 1234);
 
-  printf("pre, len, wid:\n");
-  printf("|%#1.10x|\n", 1234);
-  ft_printf("|%#1.10x|\n", 1234);
-  printf("______________\n\n");
+  //printf("pre, len, wid:\n");
+  //printf("|%#1.10x|\n", 1234);
+  //ft_printf("|%#1.10x|\n", 1234);
+  //printf("______________\n\n");
+
+//printf("|%-5.3s|\n", "LYDI");
+//ft_printf("|%-5.3s|\n", "LYDI");
 
 
-/*
 printf("STRING TEST\n");
 printf("______________\n\n");
 
@@ -97,9 +99,17 @@ printf("wid, len, pre not set:\n");
 printf("|%-15s|\n", "HELEOIJ");
 ft_printf("|%-15s|\n\n", "HELEOIJ");
 
+printf("len, wid, pre = 0:\n");
+printf("|%1.0s|\n", "HELEOIJ");
+ft_printf("|%1.0s|\n\n", "HELEOIJ");
+
+printf("wid, len, pre = 0:\n");
+printf("|%10.0s|\n", "HELEOIJ");
+ft_printf("|%10.0s|\n\n", "HELEOIJ");
+
 printf("len, pre, wid:\n");
-printf("|%10s|\n", "HELEOIJ");
-ft_printf("|%10s|\n\n", "HELEOIJ");
+printf("|%1.4s|\n", "HELEOIJ");
+ft_printf("|%1.4s|\n\n", "HELEOIJ");
 
 printf("pre, len, wid:\n");
 printf("|%1.15s|\n", "HELEOIJ");
@@ -125,7 +135,7 @@ ft_printf("|%-15.10s|\n\n", "HELEOIJ");
 
 printf("______________\n\n");
 
-
+/*
 printf("len is %d, leng is %d\n", len, leng);
 
 printf("|% 10.1d|\n", 1234);
