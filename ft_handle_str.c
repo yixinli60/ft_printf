@@ -26,7 +26,7 @@ char		*ft_handle_str(char *str, t_str_fmt *fmt_struc)
 			return (0);
 		ft_strcpy(pad, str);
 		str_w_spad = pad;
-		free(pad);
+		//free(pad);
 		return (str_w_spad);
 	}
 	else if (wid >= fmt_struc->pre && (int)ft_strlen(str) >= fmt_struc->pre
@@ -38,10 +38,9 @@ char		*ft_handle_str(char *str, t_str_fmt *fmt_struc)
 	{
 		if (!(pad = malloc(sizeof(char) * (ft_strlen(str) + 1))))
 			return (0);
-		pad[ft_strlen(str)] = '\0';
-		ft_strncpy(pad, str, ft_strlen(str));
+		ft_strcpy(pad, str);
 		str_w_spad = pad;
-		free(pad);
+		//free(pad);
 		return (str_w_spad);
 	}
 	else
@@ -66,9 +65,9 @@ char		*str_wid(char *str, t_str_fmt *fmt_struc)
 	ft_strncpy(string, str, fmt_struc->pre);
 	str_w_spad = ft_mflag(string, pad, fmt_struc);
 	final_str = str_w_spad;
-	free(string);
-	free(pad);
-	free(str_w_spad);
+	//free(string);
+	//free(pad);
+	//free(str_w_spad);
 	return (final_str);
 }
 
