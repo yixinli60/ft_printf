@@ -15,7 +15,7 @@
 
 char	*ft_add_signs(char *str, t_str_fmt *fmt_struc)
 {
-	char *string;
+	char	*string;
 
 	if (fmt_struc->conv == 'u' || fmt_struc->conv == 'U')
 		return (str);

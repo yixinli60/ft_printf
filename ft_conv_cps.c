@@ -18,25 +18,26 @@ int	ft_conv_cstr(va_list ap, t_str_fmt *fmt_struc)
 	int		i;
 	char	str[2];
 	char	*string;
-	int		width;
 
-	width = fmt_struc->wid;
 	i = va_arg(ap, int);
 	if (i == 0)
 	{
 		if (fmt_struc->wid)
 		{
-			while (width-- != 1)
-				write(1, " ", 1);
+			if (!(string = malloc(sizeof(char) * fmt_struc->wid)))
+				return (0);
+			ft_memset(string, ' ', fmt_struc->wid - 1);
+			string[fmt_struc->wid - 1] = '\0';
+			write(1, string, fmt_struc->wid - 1);
+			free(string);
 			return (fmt_struc->wid);
 		}
-		else
-			write(1, "", 1);
+		write(1, "", 1);
 		return (1);
 	}
 	str[0] = i;
 	str[1] = '\0';
-	string = ft_add_pad(str, fmt_struc);
+	string = ft_handle_str(str, fmt_struc);
 	write(1, string, ft_strlen(string));
 	return (ft_strlen(string));
 }
@@ -91,17 +92,14 @@ int	ft_conv_wsstr(va_list ap)
 	return (0);
 }
 
-int	ft_conv_wcstr(va_list ap, t_str_fmt *fmt_struc)
+int	ft_conv_wcstr(va_list ap)
 {
 	wchar_t	i;
-	char	*string;
-	char	str[2];
+	char	str[4];
 
 	i = va_arg(ap, wchar_t);
 	i = (char)i;
 	str[0] = i;
-	str[1] = '\0';
-	string = ft_add_pad(str, fmt_struc);
-	write(1, string, ft_strlen(string));
-	return (ft_strlen(string));
+	write(1, str, ft_strlen(str));
+	return (ft_strlen(str));
 }

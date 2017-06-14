@@ -44,6 +44,8 @@ int	parse_other(char **fmt, t_str_fmt *fmt_struc)
 	int		width;
 
 	width = fmt_struc->wid;
+	if (**fmt == '\0')
+		return (0);
 	while (**fmt != '\0')
 	{
 		write(1, *fmt, 1);

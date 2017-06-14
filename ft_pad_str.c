@@ -53,7 +53,7 @@ char		*wid_len_pre(char *str, t_str_fmt *fmt_struc)
 	len = ft_strlen(n_str);
 	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - len + 1))))
 		return (0);
-	pad[(fmt_struc->wid - len + 1)] = '\0';
+	pad[(fmt_struc->wid - len)] = '\0';
 	if (fmt_struc->pre == -1 && fmt_struc->flag.zero && !fmt_struc->flag.minus)
 	{
 		ft_memset(pad, '0', (fmt_struc->wid - len));
