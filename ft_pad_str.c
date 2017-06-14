@@ -87,18 +87,19 @@ char		*ft_add_pad(char *str, t_str_fmt *fmt_struc)
 	len = ft_strlen(str);
 	if (fmt_struc->pre == 0 && *str == '0' && !fmt_struc->flag.hash)
 		return (pre_str_zero(fmt_struc));
+	else if (fmt_struc->wid >= len && len >= fmt_struc->pre)
+		return (wid_len_pre(str, fmt_struc));
 	else if (fmt_struc->pre >= len && fmt_struc->pre >= fmt_struc->wid)
 	{
 		pad = ft_set_pad(fmt_struc, len);
 		str_w_0pad = ft_add_signs(ft_strjoin(pad, str), fmt_struc);
 		return (str_w_0pad);
 	}
-	else if (fmt_struc->wid >= len && len >= fmt_struc->pre)
-		return (wid_len_pre(str, fmt_struc));
 	else if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= len)
 	{
 		pad = ft_set_pad(fmt_struc, len);
 		str_w_0pad = ft_add_signs(ft_strjoin(pad, str), fmt_struc);
+		free(pad);
 		return (ft_add_space(str_w_0pad, fmt_struc));
 	}
 	return (ft_add_signs(str, fmt_struc));

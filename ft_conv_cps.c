@@ -67,8 +67,7 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	char	*i;
 	char	*final_str;
-	int len;
-
+	int		len;
 
 	i = va_arg(ap, char*);
 	if (i == NULL)

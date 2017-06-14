@@ -55,6 +55,7 @@ char	*ft_add_space(char *str_w_0pad, t_str_fmt *fmt_struc)
 	}
 	str_w_spad = ft_mflag(str_w_0pad, pad, fmt_struc);
 	free(str_w_0pad);
+	free(pad);
 	return (str_w_spad);
 }
 

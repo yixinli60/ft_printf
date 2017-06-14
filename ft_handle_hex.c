@@ -13,32 +13,6 @@
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
-/*char	*ft_hex_zero(char *str, t_str_fmt *fmt_struc)
-{
-	char	*pad;
-
-	if (fmt_struc->pre >= fmt_struc->wid && fmt_struc->pre >= (int)ft_strlen(str))
-	{
-		if (!(pad = malloc(sizeof(char) * (fmt_struc->pre + 1))))
-			return (0);
-		ft_memset(pad, '0', fmt_struc->pre);
-		pad[(fmt_struc->pre + 1)] = '\0';
-		str = pad;
-		free(pad);
-		return (str);
-	}
-	if (fmt_struc->wid >= fmt_struc->pre && fmt_struc->pre >= (int)ft_strlen(str))
-	{
-		if (!(pad = malloc(sizeof(char) * (fmt_struc->wid + 1))))
-			return (0);
-		ft_memset(pad, ' ', fmt_struc->wid);
-		pad[(fmt_struc->wid + 1)] = '\0';
-		str = pad;
-		free(pad);
-	}
-	return (str);
-}
-*/
 char	*ft_add_hash(char *str, t_str_fmt *fmt_struc)
 {
 	char	*hash_pad;
@@ -48,7 +22,6 @@ char	*ft_add_hash(char *str, t_str_fmt *fmt_struc)
 	{
 		hash_pad = ft_strjoin("0x", str);
 		final_str = hash_pad;
-		//free(hash_pad);
 		return (final_str);
 	}
 	return (str);
@@ -92,7 +65,6 @@ char	*x_wid_len_pre(char *str, t_str_fmt *fmt_struc)
 
 char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 {
-	char	*hash_pad;
 	char	*pad;
 	int		len;
 	char	*final_str;
@@ -106,9 +78,7 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 			return (0);
 		ft_memset(pad, '0', (fmt_struc->pre - len));
 		pad[(fmt_struc->pre - len)] = '\0';
-		hash_pad = ft_strjoin(pad, str);
-		final_str = hash_pad;
-		//free(hash_pad);
+		final_str = ft_strjoin(pad, str);
 		free(pad);
 		return (ft_add_hash(final_str, fmt_struc));
 	}

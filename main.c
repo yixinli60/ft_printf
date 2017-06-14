@@ -16,8 +16,8 @@
 int	main(void)
 {
 
-  printf("|%20.15d|\n", 54321);
-  ft_printf("|%20.15d|\n", 54321);
+printf("%+d\n", 3);
+ft_printf("%+d\n", 3);
 
 
   /*
