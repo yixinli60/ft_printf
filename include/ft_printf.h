@@ -88,10 +88,10 @@ uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc);
 intmax_t	ft_lendmod(va_list ap, t_str_fmt *fmt_struc);
 
 char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
-//char			*ft_hex_zero(char *str, t_str_fmt *fmt_struc);
 char			*ft_add_hash(char *str, t_str_fmt *fmt_struc);
 char			*ft_zero_hash(char *str, t_str_fmt *fmt_struc);
 char			*x_wid_len_pre(char *str, t_str_fmt *fmt_struc);
+char			*x_wid_pre_len(char *str, t_str_fmt *fmt_struc);
 
 char			*str_wid(char *str, t_str_fmt *fmt_struc);
 char			*str_len(char *str, t_str_fmt *fmt_struc);

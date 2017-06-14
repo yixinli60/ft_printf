@@ -63,11 +63,37 @@ char	*x_wid_len_pre(char *str, t_str_fmt *fmt_struc)
 	return (ft_mflag(hash_pad, pad, fmt_struc));
 }
 
+char	*x_wid_pre_len(char *str, t_str_fmt *fmt_struc)
+{
+	char	*pad;
+	int		len;
+	char	*string;
+	char	*fin;
+
+	len = ft_strlen(str);
+	if (!(pad = malloc(sizeof(char) * (fmt_struc->pre - len + 1))))
+		return (0);
+	ft_memset(pad, '0', (fmt_struc->pre - len));
+	pad[(fmt_struc->pre - len)] = '\0';
+	string = ft_strjoin(pad, str);
+	free(pad);
+	str = ft_add_hash(string, fmt_struc);
+	free(string);
+	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - ft_strlen(str) + 1))))
+		return (0);
+	ft_memset(pad, ' ', (fmt_struc->wid - ft_strlen(str)));
+	pad[(fmt_struc->wid - ft_strlen(str))] = '\0';
+	fin = ft_strjoin(pad, str);
+	free(pad);
+	return (fin);
+}
+
 char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 {
 	char	*pad;
 	int		len;
 	char	*final_str;
+	char	*final;
 
 	len = ft_strlen(str);
 	if ((len >= fmt_struc->pre) && (len >= fmt_struc->wid))
@@ -78,12 +104,13 @@ char	*ft_handle_hex(char *str, t_str_fmt *fmt_struc)
 			return (0);
 		ft_memset(pad, '0', (fmt_struc->pre - len));
 		pad[(fmt_struc->pre - len)] = '\0';
-		final_str = ft_strjoin(pad, str);
+		final = ft_strjoin(pad, str);
+		final_str = final;
 		free(pad);
 		return (ft_add_hash(final_str, fmt_struc));
 	}
 	else if ((fmt_struc->wid >= len) && (len >= fmt_struc->pre))
 		return (x_wid_len_pre(str, fmt_struc));
 	else
-		return (str);
+		return (x_wid_pre_len(str, fmt_struc));
 }

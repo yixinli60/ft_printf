@@ -10,36 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** pre_str_zero
-** when both precision and string are "0"
-** if plus flag is present, malloc pad of size width
-** if not, return empty string of width size
-*/
-
 #include "src/libft/libft.h"
 #include "include/ft_printf.h"
 
 char		*pre_str_zero(t_str_fmt *fmt_struc)
 {
 	char	*pad_w_spad;
+	char	*final_str;
 
-	if (fmt_struc->flag.plus)
+	if (fmt_struc->flag.plus && (fmt_struc->wid == 0))
 	{
-		if (!(pad_w_spad = malloc(sizeof(char) * (fmt_struc->wid) + 2)))
+		if (!(pad_w_spad = malloc(sizeof(char) * 2)))
 			return (0);
-		ft_memset(pad_w_spad, ' ', (fmt_struc->wid + 2));
-		pad_w_spad[fmt_struc->wid + 1] = '+';
-		pad_w_spad[fmt_struc->wid + 2] = '\0';
+		ft_memset(pad_w_spad, '+', 1);
 	}
 	else
 	{
 		if (!(pad_w_spad = malloc(sizeof(char) * (fmt_struc->wid) + 1)))
 			return (0);
 		ft_memset(pad_w_spad, ' ', (fmt_struc->wid));
-		pad_w_spad[fmt_struc->wid + 1] = '\0';
+		pad_w_spad[fmt_struc->wid] = '\0';
+		if (fmt_struc->flag.plus)
+			pad_w_spad[fmt_struc->wid - 1] = '+';
 	}
-	return (pad_w_spad);
+	final_str = pad_w_spad;
+	free(pad_w_spad);
+	return (final_str);
 }
 
 char		*wid_len_pre(char *str, t_str_fmt *fmt_struc)
