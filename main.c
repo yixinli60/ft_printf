@@ -15,13 +15,9 @@
 
 int	main(void)
 {
-  int len = 0;
-  int leng = 0;
 
-  len = printf("|%3c|\n", 0);
-  leng = ft_printf("|%3c|\n", 0);
-  printf("strlen %d\n", len);
-  printf("leng %d\n", leng);
+  printf("|%20.15d|\n", 54321);
+  ft_printf("|%20.15d|\n", 54321);
 
 
   /*
@@ -88,8 +84,8 @@ int	main(void)
 
 //printf("|%-5.3s|\n", "LYDI");
 //ft_printf("|%-5.3s|\n", "LYDI");
-
 /*
+
 printf("STRING TEST\n");
 printf("______________\n\n");
 

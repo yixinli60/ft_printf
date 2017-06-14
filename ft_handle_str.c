@@ -31,7 +31,6 @@ char		*ft_handle_str(char *str, t_str_fmt *fmt_struc)
 			return (0);
 		ft_strcpy(pad, str);
 		str_w_spad = pad;
-		//free(pad);
 		return (str_w_spad);
 	}
 	else
@@ -44,7 +43,6 @@ char		*str_wid(char *str, t_str_fmt *fmt_struc)
 	char	*pad;
 	char	*str_w_spad;
 	char	*string;
-	char	*final_str;
 
 	wid = fmt_struc->wid;
 	if (!(pad = malloc(sizeof(char) * (wid - fmt_struc->pre + 1))))
@@ -55,27 +53,23 @@ char		*str_wid(char *str, t_str_fmt *fmt_struc)
 		return (0);
 	ft_strncpy(string, str, fmt_struc->pre);
 	str_w_spad = ft_mflag(string, pad, fmt_struc);
-	final_str = str_w_spad;
 	free(string);
 	free(pad);
-	//free(str_w_spad);
-	return (final_str);
+	return (str_w_spad);
 }
 
 char		*str_len(char *str, t_str_fmt *fmt_struc)
 {
 	int		wid;
 	char	*pad;
-	char	*str_w_spad;
-	char	*final;
+	char	*final_str;
 
 	wid = fmt_struc->wid;
 	if ((int)ft_strlen(str) > fmt_struc->pre && fmt_struc->pre > wid)
 	{
-		if (!(str_w_spad = malloc(sizeof(char) * (fmt_struc->pre))))
+		if (!(final_str = malloc(sizeof(char) * (fmt_struc->pre))))
 			return (0);
-		ft_strncpy(str_w_spad, str, fmt_struc->pre);
-		final = str_w_spad;
+		ft_strncpy(final_str, str, fmt_struc->pre);
 	}
 	else
 	{
@@ -83,12 +77,10 @@ char		*str_len(char *str, t_str_fmt *fmt_struc)
 			return (0);
 		ft_memset(pad, ' ', (wid - ft_strlen(str)));
 		pad[(wid - ft_strlen(str))] = '\0';
-		str_w_spad = ft_mflag(str, pad, fmt_struc);
-		final = str_w_spad;
+		final_str = ft_mflag(str, pad, fmt_struc);
 		free(pad);
 	}
-	free(str_w_spad);
-	return (final);
+	return (final_str);
 }
 
 uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc)

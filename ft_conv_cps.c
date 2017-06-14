@@ -67,12 +67,17 @@ int	ft_conv_sstr(va_list ap, t_str_fmt *fmt_struc)
 {
 	char	*i;
 	char	*final_str;
+	int len;
+
 
 	i = va_arg(ap, char*);
 	if (i == NULL)
 		return (write(1, "(null)", 6));
 	final_str = ft_handle_str(i, fmt_struc);
-	return (write(1, final_str, ft_strlen(final_str)));
+	len = ft_strlen(final_str);
+	write(1, final_str, len);
+	free(final_str);
+	return (len);
 }
 
 int	ft_conv_wsstr(va_list ap)

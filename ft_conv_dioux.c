@@ -30,6 +30,7 @@ int			ft_conv_dstr(va_list ap, t_str_fmt *fmt_struc)
 	len = ft_strlen(string);
 	write(1, string, len);
 	free(str);
+//	free(string);
 	return (len);
 }
 
