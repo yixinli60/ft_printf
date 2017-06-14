@@ -6,14 +6,13 @@
 /*   By: yli <yli@student.42.us.org>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 15:15:29 by yli               #+#    #+#             */
-/*   Updated: 2017/04/24 14:38:00 by yli              ###   ########.fr       */
+/*   Updated: 2017/06/13 21:39:31 by yli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
-# include <stdio.h>
 # include <stdint.h>
 # define LENMOD_H 1
 # define LENMOD_HH 2
@@ -84,8 +83,8 @@ char			*ft_handle_oct(char *str, t_str_fmt *fmt_struc);
 int				ft_conv_wsstr(va_list ap);
 int				ft_conv_wcstr(va_list ap);
 
-uintmax_t	ft_lenmod(va_list ap, t_str_fmt *fmt_struc);
-intmax_t	ft_lendmod(va_list ap, t_str_fmt *fmt_struc);
+uintmax_t		ft_lenmod(va_list ap, t_str_fmt *fmt_struc);
+intmax_t		ft_lendmod(va_list ap, t_str_fmt *fmt_struc);
 
 char			*ft_handle_hex(char *str, t_str_fmt *fmt_struc);
 char			*ft_add_hash(char *str, t_str_fmt *fmt_struc);
@@ -95,6 +94,5 @@ char			*x_wid_pre_len(char *str, t_str_fmt *fmt_struc);
 
 char			*str_wid(char *str, t_str_fmt *fmt_struc);
 char			*str_len(char *str, t_str_fmt *fmt_struc);
-
 
 #endif

@@ -78,7 +78,6 @@ char	*x_wid_pre_len(char *str, t_str_fmt *fmt_struc)
 	string = ft_strjoin(pad, str);
 	free(pad);
 	str = ft_add_hash(string, fmt_struc);
-	free(string);
 	if (!(pad = malloc(sizeof(char) * (fmt_struc->wid - ft_strlen(str) + 1))))
 		return (0);
 	ft_memset(pad, ' ', (fmt_struc->wid - ft_strlen(str)));
